@@ -23,7 +23,7 @@ Mystery requirement:
 #### Team 2
 - Brett
 - Omer
-- Mark
+- Dylan
 
 #### Team 3
 - Alia
@@ -32,7 +32,7 @@ Mystery requirement:
 
 #### Team 4
 - Bora
-- Hanh
+- Katy
 - Christina
 
 #### Team 5
@@ -41,8 +41,8 @@ Mystery requirement:
 - Dona
 
 #### Team 6
-- Dylan
-- Katy
+- Hanh
+- Mark
 - Corey
 
 
