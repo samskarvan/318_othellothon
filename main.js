@@ -52,16 +52,3 @@ function isBoardFull() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
