@@ -20,21 +20,22 @@ body{
 
 #game-area {
     display: inline-block;
-    height: 50vh;
-    width: 50vw;
+    height: 65vh;
+    width: 60vw;
     margin: auto;
     transform: translate(50%, 10%);
     background-color: #F697C3;
+    border-radius: 5px;
 }
 
 .square {
-    display: inline-flex;
+    display: inline-block;
     justify-content: space-around;
     align-items: center;
     box-sizing: border-box;
     height: 12.5%;
     width: 12.5%;
-    border: 2px solid #C1466F;
+    border: 2px solid #FDF9CA;
     font-weight: bold;
     font-size: 1.4rem;
 }
@@ -53,15 +54,12 @@ body{
 }
 
 header{
-    width: 98%;
-    height: 18vh;
+    width: 100%;
+    height: 16vh;
     font-size: 30pt;
     background-color: #FDF9CA;
-    border-radius: 15px;
+    /*border-radius: 15px;*/
     opacity: 0.8;
-    margin-top: 1.5%;
-    margin-left: 1%;
-    /*border: 2px solid black;*/
 }
 header div {
     display: inline-block;
@@ -69,17 +67,18 @@ header div {
 }
 header::after {
     position: absolute;
-    left: 1%;
-    width: 98%;
+    left: 0;
+    width: 100%;
     content: " ";
     background: radial-gradient(circle at 50% 0%, #FDF9CA 25%, #0000 26%, #0000 40%);
-    background-size: 50px 100px;
+    background-size: 4% 100%;
     height: 15vh;
-    top: 20%;
+    top: 15%;
     background-repeat: repeat-x;
 }
 #stats {
     position: absolute;
+    padding: 15px;
     transform: translate(10%, 60%);
     display: inline-block;
     width: 15%;
@@ -98,13 +97,13 @@ header::after {
 }
 
 button{
-    height: 50px;
-    width: 120px;
-    background-color: #f1e9d2;
+    height: 10%;
+    width: 60%;
+    background-color: #F697C3;
     border: none;
-    border-radius: 20px;
-    margin: 15px;
-    font-size: 12pt;
+    border-radius: 15px;
+    /*margin: 15px;*/
+    font-size: 1em;
 }
 .card {
     transition: 0.4s;
@@ -120,8 +119,13 @@ button{
 }
 
 .front {
+    background-image: url("assets/images/kitty-coin.gif");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 80%;
     z-index: -2;
     transform: rotateY(0deg);
+
 }
 .card.back {
     transform: rotateY(180deg);
@@ -209,4 +213,33 @@ button{
 .stat-label{
     color: #12295C;
     font-size: 20pt;
+}
+.game-pieces{
+    z-index: -2;
+    transform: rotateY(0deg);
+    background-image: url("assets/images/kitty-coin.gif");
+}
+.turn-indicator img{
+    height: 50%;
+    width: 50%;
+}
+
+.choco-cat-score, .kitty-score{
+    display: inline-block;
+}
+
+.choco-score img, .kitty-score img{
+    height: 30%;
+    width: 30%;
+}
+
+/*#stats > div{*/
+    /*height: 2%;*/
+    /*width: 5%;*/
+/*}*/
+
+.border-highlight:hover{
+    border: 2px solid #A96779;
+    opacity: 0.5;
+    background-color: #C1466F;
 }
