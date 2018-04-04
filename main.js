@@ -41,9 +41,4 @@ function createGameBoard() {
 
 
 function clickedSpace(){
-
-    // andrew works here
-var newSquare
-    
-
 }
