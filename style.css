@@ -1,12 +1,11 @@
 *{
-    font-family: "Lora", serif;
+    font-family: "arial", sans serif;
     color: darkgoldenrod;
 }
 body{
-    background-image: url("images/1652923_original.jpg");
+    background-image: url("assets/images/hello-kitty-landscape.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    cursor: url('images/harry-wand.png'), auto;
 }
 #game-area {
     perspective: 1000px;
@@ -53,12 +52,12 @@ header div {
     width: 15%;
     text-align: center;
     font-size: 16pt;
-    background-color: rgba(68,8,14,0.8);
+    background-color: #FDF9CA;
     left: 2%;
-    height: 350px;
+    height: 60vh;
     border: 2px solid maroon;
     border-radius: 20px;
-    bottom: 125px;
+    bottom: 50%;
 }
 
 .games-played, .attempts, .accuracy {
