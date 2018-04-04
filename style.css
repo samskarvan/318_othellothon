@@ -4,16 +4,39 @@
 }
 body{
     background-image: url("assets/images/hello-kitty-landscape.jpg");
-    background-size: 100%;
+    background-size: 100vw 100vh;
     background-repeat: no-repeat;
 }
+/*#game-area {*/
+    /*!*perspective: 1000px;*!*/
+    /*!*position: relative;*!*/
+    /*!*width: 70%;*!*/
+    /*!*height: 50vh;*!*/
+    /*!*left: 8%;*!*/
+    /*!*margin-top: 0.5%;*!*/
+    /*!*display: inline-block;*!*/
+    /*background-color: #F697C3;*/
+/*}*/
+
 #game-area {
-    perspective: 1000px;
-    position: relative;
-    width: 70%;
-    left: 8%;
-    margin-top: 0.5%;
     display: inline-block;
+    height: 50vh;
+    width: 50vw;
+    margin: auto;
+    transform: translate(50%, 10%);
+    background-color: #F697C3;
+}
+
+.square {
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
+    height: 12.5%;
+    width: 12.5%;
+    border: 2px solid red;
+    font-weight: bold;
+    font-size: 1.4rem;
 }
 .card.flip{
     transform: rotateY(-180deg) scaleX(-1);
@@ -31,22 +54,33 @@ body{
 
 header{
     width: 98%;
-    height: 130px;
+    height: 18vh;
     font-size: 30pt;
-    background-color: black;
+    background-color: #FDF9CA;
     border-radius: 15px;
     opacity: 0.8;
     margin-top: 1.5%;
     margin-left: 1%;
-    border: 2px solid black;
+    /*border: 2px solid black;*/
 }
 header div {
     display: inline-block;
     padding: 5pt;
 }
-
+header::after {
+    position: absolute;
+    left: 1%;
+    width: 98%;
+    content: " ";
+    background: radial-gradient(circle at 50% 0%, #FDF9CA 25%, #0000 26%, #0000 40%);
+    background-size: 50px 100px;
+    height: 15vh;
+    top: 20%;
+    background-repeat: repeat-x;
+}
 #stats {
-    position: relative;
+    position: absolute;
+    transform: translate(10%, 60%);
     display: inline-block;
     width: 15%;
     text-align: center;
@@ -115,10 +149,8 @@ button{
     left: 18%;
 }
 #game-title{
-    background-image: url("images/game-title-small.gif");
     height: 75px;
     width: 225px;
-    background-repeat: no-repeat;
     position: relative;
     right: 3%;
     bottom: 8%;
@@ -171,4 +203,9 @@ button{
     text-align: center;
     top: 220px;
     font-size: 30pt;
+}
+
+.stat-label{
+    color: #12295C;
+    font-size: 20pt;
 }
