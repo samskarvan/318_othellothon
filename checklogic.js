@@ -2,10 +2,13 @@
 
 function checkForValidEntry(){
 
-    if (this === undefined){
-        checkHorizontal();
-        checkVertical();
-        checkDiagonal();
+    if (this.value=== undefined){
+        var valueClicked = this;
+        var rowClicked = this.attr('row');
+        var columnClicked = this.attr('column');
+        checkHorizontal(rowClicked,columnClicked);
+        checkVertical(rowClicked,columnClicked);
+        checkDiagonal(rowClicked,columnClicked);
     }else{
         return;
     }
@@ -14,29 +17,31 @@ function checkForValidEntry(){
         var i;
         var k;
 
-        if (this.row+1 === undefined || this.row+1 === this.row+1){
+        if ( gameBoard2dArr[rowClicked][columnClicked +1] === "blank" || gameboard2dArr[rowClicked][columnClicked+1].value === valueClicked){
             return;
         }
         else{
             k= 2;
-            for(i = this.row +1; i <= 8; i++){
-                if(this.row +k === undefined){
+            for(i = columnClicked +1; i <= 7; i++){
+                if(gameBoard2dArr[rowClicked][columnClicked+k] === "blank"){
                     return;
                 }
-                if(this.row +k === this.row){
+                if(gameBoard2dArr[rowClicked][columnClicked+k].value === valueClicked){
                     //valid spot
+                    return;
                 }
                 else{
                     k++;
                 }
             }
             k= -2;
-            for(i = this.row -1; i >= 1; i--){
-                if(this.row -k === undefined){
+            for(i = columnClicked -1; i >= 0; i--){
+                if(gameBoard2dArr[rowClicked][columnClicked-k] === "blank"){
                     return;
                 }
-                if(this.row -k === this.row){
+                if(gameBoard2dArr[rowClicked][columnClicked-k].value === valueClicked){
                     //valid spot
+                    return;
                 }
                 else{
                     k--;
