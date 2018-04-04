@@ -45,6 +45,9 @@ function createPieces() {
     $(this).append(gamePiece)
 }
 
+function isBoardFull() {
+    
+}
 
 
 
