@@ -172,3 +172,51 @@ button{
     top: 220px;
     font-size: 30pt;
 }
+
+#game-area {
+    display: inline-block;
+    height: 500px;
+    width: 500px;
+    margin: auto;
+    transform: translate(20%, 10%);
+}
+
+.game-row, .column, .square {
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
+    height: 12.5%;
+    width: 12.5%;
+    border: 2px solid red;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.game-pieces {
+    display: inline;
+    box-sizing: border-box;
+    vertical-align: top;
+    border-radius: 100%;
+    background-color: black;
+    height: 15px;
+    width: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
