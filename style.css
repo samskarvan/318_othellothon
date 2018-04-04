@@ -1,0 +1,211 @@
+*{
+    font-family: "arial", sans serif;
+    color: #12295C;
+}
+body{
+    background-image: url("assets/images/hello-kitty-landscape.jpg");
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+}
+/*#game-area {*/
+    /*!*perspective: 1000px;*!*/
+    /*!*position: relative;*!*/
+    /*!*width: 70%;*!*/
+    /*!*height: 50vh;*!*/
+    /*!*left: 8%;*!*/
+    /*!*margin-top: 0.5%;*!*/
+    /*!*display: inline-block;*!*/
+    /*background-color: #F697C3;*/
+/*}*/
+
+#game-area {
+    display: inline-block;
+    height: 50vh;
+    width: 50vw;
+    margin: auto;
+    transform: translate(50%, 10%);
+    background-color: #F697C3;
+}
+
+.square {
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
+    height: 12.5%;
+    width: 12.5%;
+    border: 2px solid red;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+.card.flip{
+    transform: rotateY(-180deg) scaleX(-1);
+}
+.disabled {
+    pointer-events: none;
+}
+.card, .card img {
+    width: 125px;
+    height: 150px;
+    display: inline-block;
+    border-radius: 25px;
+    padding: 5px;
+}
+
+header{
+    width: 98%;
+    height: 18vh;
+    font-size: 30pt;
+    background-color: #FDF9CA;
+    border-radius: 15px;
+    opacity: 0.8;
+    margin-top: 1.5%;
+    margin-left: 1%;
+    /*border: 2px solid black;*/
+}
+header div {
+    display: inline-block;
+    padding: 5pt;
+}
+header::after {
+    position: absolute;
+    left: 1%;
+    width: 98%;
+    content: " ";
+    background: radial-gradient(circle at 50% 0%, #FDF9CA 25%, #0000 26%, #0000 40%);
+    background-size: 50px 100px;
+    height: 15vh;
+    top: 20%;
+    background-repeat: repeat-x;
+}
+#stats {
+    position: absolute;
+    transform: translate(10%, 60%);
+    display: inline-block;
+    width: 15%;
+    text-align: center;
+    font-size: 16pt;
+    background-color: #FDF9CA;
+    left: 2%;
+    height: 60vh;
+    border: 2px solid #F697C3;
+    border-radius: 20px;
+    bottom: 50%;
+}
+
+.games-played, .attempts, .accuracy {
+    padding: 15px;
+}
+
+button{
+    height: 50px;
+    width: 120px;
+    background-color: #f1e9d2;
+    border: none;
+    border-radius: 20px;
+    margin: 15px;
+    font-size: 12pt;
+}
+.card {
+    transition: 0.4s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.front {
+    z-index: -2;
+    transform: rotateY(0deg);
+}
+.card.back {
+    transform: rotateY(180deg);
+}
+.logo{
+    background-image: url("assets/images/HK-head.png");
+    height: 125px;
+    width: 160px;
+    background-repeat: no-repeat;
+    position: relative;
+    left: 45%;
+}
+#about-nav{
+    height: 100px;
+    width: 200px;
+    position: relative;
+    top: 30%;
+    left: 20%;
+}
+#settings-nav{
+    height: 100px;
+    width: 200px;
+    position: relative;
+    top: 30%;
+    left: 18%;
+}
+#game-title{
+    height: 75px;
+    width: 225px;
+    position: relative;
+    right: 3%;
+    bottom: 8%;
+}
+#about-content, #win-window {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(84,7,18,0.8);
+    z-index: 2;
+}
+#about-content-text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 40px;
+    color: #12295C;
+    text-align: center;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+}
+#about-content img {
+    position: relative;
+    left: 40%;
+    top:5%;
+    height: 200px;
+}
+#win-window-content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 40px;
+    color: #12295C;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+}
+
+#win-window img {
+    position: relative;
+    left: 30%;
+    top: 200px;
+}
+#win-window p {
+    position: relative;
+    text-align: center;
+    top: 220px;
+    font-size: 30pt;
+}
+
+.stat-label{
+    color: #12295C;
+    font-size: 20pt;
+}
