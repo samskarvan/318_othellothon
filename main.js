@@ -16,7 +16,7 @@ function createGameBoard(columnAmount, rowAmount) {
     var columnCountBuild = 1;
     for(rowIterate = 0; rowIterate < columnAmount; rowIterate++) {
         var newFirstSquareOfRow = ($("<div>", {
-            class: "square front black border-highlight",
+            class: "square",
             value: "blank",
             row: rowCountFirst,
             column: 0,
@@ -48,24 +48,15 @@ function createGameBoard(columnAmount, rowAmount) {
 
 function createPieces() {
     console.log("pieces initiated");
-    var gamePiece = $("<div class='game-pieces'>");
-    $(this).append(gamePiece)
+    console.log(this);
+    $(this).addClass("front", "border-highlight");
 }
 
-// function isBoardFull() {
-//     gameBoard2dArray = [
-//         [[], [], [], [], [], [], [], []], //row 0
-//         [[], [], [], [], [], [], [], []], //row 1
-//         [[], [], [], [], [], [], [], []], //row 2
-//         [[], [], [], [], [], [], [], []], //row 3
-//         [[], [], [], [], [], [], [], []], //row 4
-//         [[], [], [], [], [], [], [], []], //row 5
-//         [[], [], [], [], [], [], [], []], //row 6
-//         [[], [], [], [], [], [], [], []] //row 7
-//         //c0 c1  c2  c3  c4  c5  c6  c7
-//     ]
-// }
+//based on whose turn it is, white kitty and black kitty
 
+function middleSquares() {
+    $("div").attr("row","3");
+}
 
 
 
