@@ -34,7 +34,7 @@ body{
     box-sizing: border-box;
     height: 12.5%;
     width: 12.5%;
-    border: 2px solid red;
+    border: 2px solid #C1466F;
     font-weight: bold;
     font-size: 1.4rem;
 }
@@ -127,12 +127,13 @@ button{
     transform: rotateY(180deg);
 }
 .logo{
-    background-image: url("assets/images/HK-head.png");
-    height: 125px;
-    width: 160px;
+    background-image: url(assets/images/HK-head.png);
+    height: 20vh;
+    width: 40vw;
     background-repeat: no-repeat;
     position: relative;
-    left: 45%;
+    left: 5%;
+    background-size: 20vw 20vh;
 }
 #about-nav{
     height: 100px;
