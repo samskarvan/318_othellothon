@@ -16,8 +16,8 @@ function createGameBoard(columnAmount, rowAmount) {
     var columnCountBuild = 1;
     for(rowIterate = 0; rowIterate < columnAmount; rowIterate++) {
         var newFirstSquareOfRow = ($("<div>", {
-            class: "square",
-            value: "blank",
+            class: "square front border-highlight",
+            value: "blank"
             row: rowCountFirst,
             column: 0,
             click: createPieces //put Andrew's function here
