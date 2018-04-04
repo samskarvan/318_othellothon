@@ -8,6 +8,45 @@
     <title>Document</title>
 </head>
 <body>
-LET'S GO TEAM WOOHOO
+<header>
+    <div class="logo">    </div>
+    <div id="settings-nav">    </div>
+    <div id="about-nav">    </div>
+</header>
+<div id="stats">
+    <div class="turn-indicator">
+        <div class="label">Turn</div>
+        <div class="value"></div>
+    </div>
+    <div class="attempts">
+        <div class="label">Score</div>
+        <div class="value"></div>
+    </div>
+    <div class="games-played">
+        <div class="label">Games Played</div>
+        <div class="value"></div>
+    </div>
+    <div class="accuracy">
+        <div class="label">Accuracy</div>
+        <div class="value"></div>
+    </div>
+
+    <button class="reset">New Game</button>
+</div>
+
+<div id="game-area">this is where our grid will be appended</div>
+
+
+<div id="about-content" onclick="overlayOff()">
+    <p id="about-content-text">this is how to play the game!!</p>
+</div>
+
+<div id="win-window" onclick="overlayOff()">
+    <p>here is some info about the game creators (we are awesome)</p>
+</div>
+<!--<audio autoplay loop>-->
+    <!--<source id="hedwigs-theme" src="Hedwig.mp3" type="audio/mpeg">-->
+<!--</audio>-->
+</body>
 </body>
 </html>

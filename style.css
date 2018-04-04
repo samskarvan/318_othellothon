@@ -1,0 +1,180 @@
+*{
+    font-family: "Lora", serif;
+    color: darkgoldenrod;
+}
+body{
+    background-image: url("images/1652923_original.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: url('images/harry-wand.png'), auto;
+}
+#game-area {
+    perspective: 1000px;
+    position: relative;
+    width: 70%;
+    left: 8%;
+    margin-top: 0.5%;
+    display: inline-block;
+    cursor: url('images/harry-wand.png'),auto;
+}
+.card.flip{
+    transform: rotateY(-180deg) scaleX(-1);
+}
+.disabled {
+    pointer-events: none;
+}
+.card, .card img {
+    width: 125px;
+    height: 150px;
+    display: inline-block;
+    border-radius: 25px;
+    padding: 5px;
+}
+
+header{
+    width: 98%;
+    height: 130px;
+    font-size: 30pt;
+    background-color: black;
+    border-radius: 15px;
+    opacity: 0.8;
+    margin-top: 1.5%;
+    margin-left: 1%;
+    border: 2px solid black;
+}
+header div {
+    display: inline-block;
+    padding: 5pt;
+}
+
+#stats {
+    position: relative;
+    display: inline-block;
+    width: 15%;
+    text-align: center;
+    font-size: 16pt;
+    background-color: rgba(68,8,14,0.8);
+    left: 2%;
+    height: 350px;
+    border: 2px solid maroon;
+    border-radius: 20px;
+    bottom: 125px;
+}
+
+.games-played, .attempts, .accuracy {
+    padding: 15px;
+}
+
+button{
+    height: 50px;
+    width: 120px;
+    background-color: #f1e9d2;
+    border: none;
+    border-radius: 20px;
+    margin: 15px;
+    font-size: 12pt;
+}
+.card {
+    transition: 0.4s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.front {
+    z-index: -2;
+    transform: rotateY(0deg);
+}
+.card.back {
+    transform: rotateY(180deg);
+}
+.logo{
+    background-image: url("images/marauders-logo-edit.gif");
+    height: 125px;
+    width: 160px;
+    background-repeat: no-repeat;
+    position: relative;
+    left: 45%;
+}
+#about-nav{
+    height: 100px;
+    width: 200px;
+    background-image: url("images/about.gif");
+    background-repeat: no-repeat;
+    position: relative;
+    top: 30%;
+    left: 20%;
+}
+#settings-nav{
+    background-image: url("images/settings.gif");
+    height: 100px;
+    width: 200px;
+    background-repeat: no-repeat;
+    position: relative;
+    top: 30%;
+    left: 18%;
+}
+#game-title{
+    background-image: url("images/game-title-small.gif");
+    height: 75px;
+    width: 225px;
+    background-repeat: no-repeat;
+    position: relative;
+    right: 3%;
+    bottom: 8%;
+}
+#about-content, #win-window {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(84,7,18,0.8);
+    z-index: 2;
+}
+#about-content-text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 40px;
+    color: goldenrod;
+    text-align: center;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+}
+#about-content img {
+    position: relative;
+    left: 40%;
+    top:5%;
+    height: 200px;
+}
+#win-window-content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 40px;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+}
+
+#win-window img {
+    position: relative;
+    left: 30%;
+    top: 200px;
+}
+#win-window p {
+    position: relative;
+    text-align: center;
+    top: 220px;
+    font-size: 30pt;
+}
