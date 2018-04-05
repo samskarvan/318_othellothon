@@ -93,8 +93,10 @@ function checkForValidEntry(){
         var currentPosition;
         var searchExtender;
 
+
             // Right Horizontal Check
         if ( gameBoard2dArray[rowClicked][(columnClicked +1)] === "not-clicked" || gameBoard2dArray[rowClicked][columnClicked+1] === playerWithCurrentTurn){
+
             console.log('not valid');
         }
         else {
