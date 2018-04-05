@@ -24,8 +24,8 @@ body{
     width: 60vw;
     margin: auto;
     transform: translate(50%, 10%);
-    background-color: #F697C3;
     border-radius: 5px;
+    background-color: #F697C3;
 }
 
 .square {
@@ -38,6 +38,7 @@ body{
     border: 2px solid #FDF9CA;
     font-weight: bold;
     font-size: 1.4rem;
+    background-color: #F697C3;
 }
 .card.flip{
     transform: rotateY(-180deg) scaleX(-1);
@@ -96,9 +97,9 @@ header::after {
     padding: 15px;
 }
 
-button{
-    height: 10%;
-    width: 60%;
+button, .reset{
+    height: 10vh;
+    width: 10vw;
     background-color: #F697C3;
     border: none;
     border-radius: 15px;
@@ -127,11 +128,15 @@ button{
     background-image: url("assets/images/kitty-coin.gif");
     background-position: center;
     background-repeat: no-repeat;
+    z-index: -1;
+    transform: rotateY(180deg);
 }
 .black{
     background-image: url("assets/images/choco-coin.gif");
     background-position: center;
     background-repeat: no-repeat;
+    z-index: 0;
+    transform: rotateY(180deg);
 }
 .card.back {
     transform: rotateY(180deg);
