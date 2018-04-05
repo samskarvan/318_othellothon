@@ -19,7 +19,7 @@ function createGameBoard(columnAmount, rowAmount) {
     for(rowIterate = 0; rowIterate < columnAmount; rowIterate++) {
         var newFirstSquareOfRow = ($("<div>", {
             class: "square front",
-            value: "blank",
+            value: "not-clicked",
             row: rowCountFirst,
             column: 0,
             click: checkForValidEntry
@@ -32,7 +32,7 @@ function createGameBoard(columnAmount, rowAmount) {
         for(colIterate = 0; colIterate < rowAmount-1; colIterate++) {
             var newSquare = ($("<div>", {
                 class: "square front",
-                value: "blank",
+                value: "not-clicked",
                 row: rowCountBuild,
                 column: columnCountBuild,
                 click: checkForValidEntry
@@ -56,7 +56,7 @@ function createPieces() {
 
 function checkForValidEntry(){
 
-    if ($(this).attr('value') === "blank"){
+    if ($(this).attr('value') === "not-clicked"){
         var valueClicked = $(this).attr('value');
         var rowClicked = parseInt($(this).attr('row'));
         var columnClicked = parseInt($(this).attr('column'));
@@ -70,13 +70,13 @@ function checkForValidEntry(){
         var currentPosition;
         var searchExtender;
 
-        if ( gameBoard2dArray[rowClicked][(columnClicked +1)] === "blank" || gameBoard2dArray[rowClicked][columnClicked+1] === valueClicked){
+        if ( gameBoard2dArray[rowClicked][(columnClicked +1)] === "not-clicked" || gameBoard2dArray[rowClicked][columnClicked+1] === valueClicked){
             console.log('not valid');
         }
         else {
             searchExtender = 2;
             for (currentPosition = columnClicked + 1; currentPosition <= 7; currentPosition++) {
-                if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === "blank") {
+                if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === "not-clicked") {
                     return;
                 }
                 if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === "black") {
@@ -88,13 +88,13 @@ function checkForValidEntry(){
                 }
             }
         }
-        if ( gameBoard2dArray[rowClicked][(columnClicked -1)] === "blank" || gameBoard2dArray[rowClicked][columnClicked-1] === valueClicked){
+        if ( gameBoard2dArray[rowClicked][(columnClicked -1)] === "not-clicked" || gameBoard2dArray[rowClicked][columnClicked-1] === valueClicked){
             console.log('not valid');
         }
         else{
             searchExtender= 2;
             for(currentPosition = columnClicked -1; currentPosition >= 0; currentPosition--) {
-                if (gameBoard2dArray[rowClicked][columnClicked - searchExtender] === "blank") {
+                if (gameBoard2dArray[rowClicked][columnClicked - searchExtender] === "not-clicked") {
                     return;
                 }
                 if (gameBoard2dArray[rowClicked][columnClicked - searchExtender] === "black") {
@@ -112,13 +112,13 @@ function checkForValidEntry(){
         var currentPosition;
         var searchExtender;
 
-        if ( gameBoard2dArray[rowClicked+1][(columnClicked)] === "blank" || gameBoard2dArray[rowClicked+1][columnClicked] === valueClicked){
+        if ( gameBoard2dArray[rowClicked+1][(columnClicked)] === "not-clicked" || gameBoard2dArray[rowClicked+1][columnClicked] === valueClicked){
             console.log('not valid');
         }
         else {
             searchExtender = 2;
             for (currentPosition = rowClicked + 1; currentPosition <= 7; currentPosition++) {
-                if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === "blank") {
+                if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === "not-clicked") {
                     return;
                 }
                 if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === "black") {
@@ -130,13 +130,13 @@ function checkForValidEntry(){
                 }
             }
         }
-        if ( gameBoard2dArray[rowClicked-1][(columnClicked)] === "blank" || gameBoard2dArray[rowClicked-1][columnClicked] === valueClicked){
+        if ( gameBoard2dArray[rowClicked-1][(columnClicked)] === "not-clicked" || gameBoard2dArray[rowClicked-1][columnClicked] === valueClicked){
             console.log('not valid');
         }
         else{
             searchExtender= 2;
             for(currentPosition = columnClicked -1; currentPosition >= 0; currentPosition--){
-                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked] === "blank"){
+                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked] === "not-clicked"){
                     return;
                 }
                 if(gameBoard2dArray[rowClicked-searchExtender][columnClicked] === "black"){
