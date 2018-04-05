@@ -58,14 +58,20 @@ function createPieces() {
 
 function flipCoins(array) {
     var coinsToBeFlippedIndex = 0;
+    var currentTurnCoinIcon = playerWithCurrentTurn;
     while (coinsToBeFlippedIndex < array.length) {
-        array[coinsToBeFlippedIndex].toggleClass(playerWithCurrentTurn);
+        array[coinsToBeFlippedIndex].toggleClass(playerWithCurrentTurn).attr('value', playerWithCurrentTurn);
+        var columnIndex=array[coinsToBeFlippedIndex].attr('column');
+        var rowIndex = array[coinsToBeFlippedIndex].attr('row');
+        gameBoard2dArray[rowIndex][columnIndex]=playerWithCurrentTurn;
         coinsToBeFlippedIndex++;
-        if (playerWithCurrentTurn === "black") {
-            playerWithCurrentTurn = "white";
-        } else {
-            playerWithCurrentTurn = "black";
-        }
+    }
+    if (playerWithCurrentTurn === "black") {
+        playerWithCurrentTurn = "white";
+        $('.turn-indicator img').attr('src','images/kitty-coin.gif');
+    } else {
+        playerWithCurrentTurn = "black";
+        $('.turn-indicator img').attr('src','images/choco-coin.gif');
     }
 }
 
