@@ -4,6 +4,7 @@ $(document).ready(initializeApp);
 function initializeApp(){
 console.log("Hello, Kitty!");
 createGameBoard(8,8);
+middleSquares();
 
 }
 
@@ -16,7 +17,7 @@ function createGameBoard(columnAmount, rowAmount) {
     var columnCountBuild = 1;
     for(rowIterate = 0; rowIterate < columnAmount; rowIterate++) {
         var newFirstSquareOfRow = ($("<div>", {
-            class: "square front border-highlight",
+            class: "square front",
             value: "blank",
             row: rowCountFirst,
             column: 0,
@@ -29,7 +30,7 @@ function createGameBoard(columnAmount, rowAmount) {
         gameBoard.append(newFirstSquareOfRow);
         for(colIterate = 0; colIterate < rowAmount-1; colIterate++) {
             var newSquare = ($("<div>", {
-                class: "square",
+                class: "square front",
                 value: "blank",
                 row: rowCountBuild,
                 column: columnCountBuild,
@@ -48,11 +49,9 @@ function createGameBoard(columnAmount, rowAmount) {
 
 function createPieces() {
     console.log("pieces initiated");
-    var gamePiece = $("<div class='game-pieces'>");
-    $(this).append(gamePiece)
+    console.log(this);
+    $(this).addClass("front", "border-highlight");
 }
-
-
 
 function checkForValidEntry(){
 
@@ -140,25 +139,21 @@ function checkForValidEntry(){
     }
     function checkDiagonal(){
 
-
     }
-
 }
 
-// function isBoardFull() {
-//     gameBoard2dArray = [
-//         [[], [], [], [], [], [], [], []], //row 0
-//         [[], [], [], [], [], [], [], []], //row 1
-//         [[], [], [], [], [], [], [], []], //row 2
-//         [[], [], [], [], [], [], [], []], //row 3
-//         [[], [], [], [], [], [], [], []], //row 4
-//         [[], [], [], [], [], [], [], []], //row 5
-//         [[], [], [], [], [], [], [], []], //row 6
-//         [[], [], [], [], [], [], [], []] //row 7
-//         //c0 c1  c2  c3  c4  c5  c6  c7
-//     ]
-// }
+function middleSquares() {
+    pieceClassArray = [ "white", "black"]
+    $( "[row=3][column=3]" ).addClass(pieceClassArray[0])
+    $( "[row=3][column=4]" ).addClass(pieceClassArray[1])
+    $( "[row=4][column=3]" ).addClass(pieceClassArray[1])
+    $( "[row=4][column=4]" ).addClass(pieceClassArray[0])
+    //could add randomization later to order of starting chips
+}
 
+function resetGame() {
+    
+}
 
 
 
