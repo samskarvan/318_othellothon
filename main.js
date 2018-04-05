@@ -19,7 +19,7 @@ function createGameBoard(columnAmount, rowAmount) {
     for(rowIterate = 0; rowIterate < columnAmount; rowIterate++) {
         var newFirstSquareOfRow = ($("<div>", {
             class: "square front",
-            value: "blank",
+            value: "not-clicked",
             row: rowCountFirst,
             column: 0,
             click: checkForValidEntry
@@ -32,7 +32,7 @@ function createGameBoard(columnAmount, rowAmount) {
         for(colIterate = 0; colIterate < rowAmount-1; colIterate++) {
             var newSquare = ($("<div>", {
                 class: "square front",
-                value: "blank",
+                value: "not-clicked",
                 row: rowCountBuild,
                 column: columnCountBuild,
                 click: checkForValidEntry
@@ -56,26 +56,27 @@ function createPieces() {
 
 var playerWithCurrentTurn="black";
 var testingArray=gameBoard2dArray;
-function flipCoins(gameBoard2Array){
+function flipCoins(gameBoard2Array) {
     //since we don't have ai functionality, user will play for both teams, so default turn will be set to black
     //turn all values in the array to the value of the current turn - call flip function
     //change current player to white after flipping has occured (at end of function)
-    var coinsToBeFlippedIndex=0;
-    while(coinsToBeFlippedIndex<array.length){
+    var coinsToBeFlippedIndex = 0;
+    while (coinsToBeFlippedIndex < array.length) {
         // array[coinsToBeFlippedIndex] flip animation--should divs start with all coin classes at different z indexs and then toggle higher/lower index classes on flip?
         array[coinsToBeFlippedIndex].toggleClass(playerWithCurrentTurn);//class of coin whose turn it is-white or black//);
         coinsToBeFlippedIndex++;
-        if(playerWithCurrentTurn==="black"){
-            playerWithCurrentTurn="white";
-        }else{
-            playerWithCurrentTurn="black";
+        if (playerWithCurrentTurn === "black") {
+            playerWithCurrentTurn = "white";
+        } else {
+            playerWithCurrentTurn = "black";
         }
     }
+}
 
 
 function checkForValidEntry(){
 
-    if ($(this).attr('value') === "blank"){
+    if ($(this).attr('value') === "not-clicked"){
         var valueClicked = $(this).attr('value');
         var rowClicked = parseInt($(this).attr('row'));
         var columnClicked = parseInt($(this).attr('column'));
@@ -89,13 +90,13 @@ function checkForValidEntry(){
         var currentPosition;
         var searchExtender;
 
-        if ( gameBoard2dArray[rowClicked][(columnClicked +1)] === "blank" || gameBoard2dArray[rowClicked][columnClicked+1] === valueClicked){
+        if ( gameBoard2dArray[rowClicked][(columnClicked +1)] === "not-clicked" || gameBoard2dArray[rowClicked][columnClicked+1] === playerWithCurrentTurn){
             console.log('not valid');
         }
         else {
             searchExtender = 2;
             for (currentPosition = columnClicked + 1; currentPosition <= 7; currentPosition++) {
-                if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === "blank") {
+                if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === "not-clicked") {
                     return;
                 }
                 if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === "black") {
@@ -107,13 +108,13 @@ function checkForValidEntry(){
                 }
             }
         }
-        if ( gameBoard2dArray[rowClicked][(columnClicked -1)] === "blank" || gameBoard2dArray[rowClicked][columnClicked-1] === valueClicked){
+        if ( gameBoard2dArray[rowClicked][(columnClicked -1)] === "not-clicked" || gameBoard2dArray[rowClicked][columnClicked-1] === playerWithCurrentTurn){
             console.log('not valid');
         }
         else{
             searchExtender= 2;
             for(currentPosition = columnClicked -1; currentPosition >= 0; currentPosition--) {
-                if (gameBoard2dArray[rowClicked][columnClicked - searchExtender] === "blank") {
+                if (gameBoard2dArray[rowClicked][columnClicked - searchExtender] === "not-clicked") {
                     return;
                 }
                 if (gameBoard2dArray[rowClicked][columnClicked - searchExtender] === "black") {
@@ -131,13 +132,13 @@ function checkForValidEntry(){
         var currentPosition;
         var searchExtender;
 
-        if ( gameBoard2dArray[rowClicked+1][(columnClicked)] === "blank" || gameBoard2dArray[rowClicked+1][columnClicked] === valueClicked){
+        if ( gameBoard2dArray[rowClicked+1][(columnClicked)] === "not-clicked" || gameBoard2dArray[rowClicked+1][columnClicked] === playerWithCurrentTurn){
             console.log('not valid');
         }
         else {
             searchExtender = 2;
             for (currentPosition = rowClicked + 1; currentPosition <= 7; currentPosition++) {
-                if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === "blank") {
+                if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === "not-clicked") {
                     return;
                 }
                 if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === "black") {
@@ -149,13 +150,13 @@ function checkForValidEntry(){
                 }
             }
         }
-        if ( gameBoard2dArray[rowClicked-1][(columnClicked)] === "blank" || gameBoard2dArray[rowClicked-1][columnClicked] === valueClicked){
+        if ( gameBoard2dArray[rowClicked-1][(columnClicked)] === "not-clicked" || gameBoard2dArray[rowClicked-1][columnClicked] === playerWithCurrentTurn){
             console.log('not valid');
         }
         else{
             searchExtender= 2;
             for(currentPosition = columnClicked -1; currentPosition >= 0; currentPosition--){
-                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked] === "blank"){
+                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked] === "not-clicked"){
                     return;
                 }
                 if(gameBoard2dArray[rowClicked-searchExtender][columnClicked] === "black"){
@@ -169,7 +170,90 @@ function checkForValidEntry(){
         }
     }
     function checkDiagonal(){
-
+        var currentPosition;
+        var searchExtender;
+        // bottom right diagonal check
+        // var greaterNumber needed to compare the greater of [rowClicked+1] and [(columnClicked+1)] to be used as currentPosition
+        if ( gameBoard2dArray[rowClicked+1][(columnClicked+1)] === "not-clicked" || gameBoard2dArray[rowClicked+1][columnClicked+1] === playerWithCurrentTurn){
+            console.log('not valid');
+        }
+        else{
+            var greaterNumber = Math.max(rowClicked, columnClicked);
+            searchExtender= 2;
+            for(currentPosition = greaterNumber +1; currentPosition <= 7; currentPosition++){
+                if(gameBoard2dArray[rowClicked+searchExtender][columnClicked+searchExtender] === "not-clicked"){
+                    return;
+                }
+                if(gameBoard2dArray[rowClicked+searchExtender][columnClicked+searchExtender] === "black"){
+                    console.log('this is a valid spot');
+                    return;
+                }
+                else{
+                    searchExtender++;
+                }
+            }
+        }
+        // top right diagonal check
+        // need a variable to see if row or column is closer to the edge, then pick that value for current position. (may require an additional loop)
+        if ( gameBoard2dArray[rowClicked-1][(columnClicked+1)] === "not-clicked" || gameBoard2dArray[rowClicked-1][columnClicked+1] === playerWithCurrentTurn){
+            console.log('not valid');
+        }
+        else{
+            searchExtender= 2;
+            for(currentPosition = columnClicked +1; currentPosition <= 7; currentPosition++){
+                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked+searchExtender] === "not-clicked"){
+                    return;
+                }
+                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked+searchExtender] === "black"){
+                    console.log('this is a valid spot');
+                    return;
+                }
+                else{
+                    searchExtender++;
+                }
+            }
+        }
+        // top left diagonal check
+        // Var lesserNumber needed to compare the lesser of [rowClicked-1] and [(columnClicked-1)] to be used as currentPosition
+        if ( gameBoard2dArray[rowClicked-1][(columnClicked-1)] === "not-clicked" || gameBoard2dArray[rowClicked-1][columnClicked-1] === playerWithCurrentTurn){
+            console.log('not valid');
+        }
+        else{
+            var lesserNumber = Math.min(rowClicked, columnClicked);
+            searchExtender= 2;
+            for(currentPosition = lesserNumber -1; currentPosition >= 0; currentPosition--){
+                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked-searchExtender] === "not-clicked"){
+                    return;
+                }
+                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked-searchExtender] === "black"){
+                    console.log('this is a valid spot');
+                    return;
+                }
+                else{
+                    searchExtender++;
+                }
+            }
+        }
+        // bottom left diagonal check
+        // need a variable to see if row or column is closer to the edge, then pick that value for current position. (may require an additional loop)
+        if ( gameBoard2dArray[rowClicked+1][(columnClicked-1)] === "not-clicked" || gameBoard2dArray[rowClicked+1][columnClicked-1] === playerWithCurrentTurn){
+            console.log('not valid');
+        }
+        else{
+            searchExtender= 2;
+            for(currentPosition = columnClicked -1; currentPosition >= 0; currentPosition--){
+                if(gameBoard2dArray[rowClicked+searchExtender][columnClicked-searchExtender] === "not-clicked"){
+                    return;
+                }
+                if(gameBoard2dArray[rowClicked+searchExtender][columnClicked-searchExtender] === "black"){
+                    console.log('this is a valid spot');
+                    return;
+                }
+                else{
+                    searchExtender++;
+                }
+            }
+        }
     }
 }
 
@@ -214,7 +298,7 @@ function resetGame() {
 function changeArray() {
     //change Array when dom changes
     gameBoard2dArray[$(this).attr("row")][$(this).attr("column")] = $(this).attr("value");
-    console.log(this)
+    console.log(this);
 }
 
 //need function to tell which player clicked last
