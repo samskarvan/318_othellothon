@@ -4,9 +4,11 @@ $(document).ready(initializeApp);
 function initializeApp(){
 console.log("Hello, Kitty!");
 createGameBoard(8,8);
+middleSquares();
 
 }
 
+var currentPlayer = "black";
 var gameBoard2dArray = [];
 
 function createGameBoard(columnAmount, rowAmount) {
@@ -16,11 +18,11 @@ function createGameBoard(columnAmount, rowAmount) {
     var columnCountBuild = 1;
     for(rowIterate = 0; rowIterate < columnAmount; rowIterate++) {
         var newFirstSquareOfRow = ($("<div>", {
-            class: "square front white",
+            class: "square front",
             value: "blank",
             row: rowCountFirst,
             column: 0,
-            click: createPieces //put Andrew's function here
+            click: checkForValidEntry
         }));
         gameBoard2dArray.push([]);
         gameBoard2dArray[rowCountFirst].push(newFirstSquareOfRow[0].attributes.value.nodeValue);
@@ -29,11 +31,11 @@ function createGameBoard(columnAmount, rowAmount) {
         gameBoard.append(newFirstSquareOfRow);
         for(colIterate = 0; colIterate < rowAmount-1; colIterate++) {
             var newSquare = ($("<div>", {
-                class: "square",
+                class: "square front",
                 value: "blank",
                 row: rowCountBuild,
                 column: columnCountBuild,
-                click: createPieces //put Andrew's function here
+                click: checkForValidEntry
             }));
             gameBoard.append(newSquare);
             gameBoard2dArray[rowCountBuild].push(newSquare[0].attributes.value.nodeValue);
@@ -52,7 +54,6 @@ function createPieces() {
     $(this).addClass("front", "border-highlight");
 }
 
-//based on whose turn it is, white kitty and black kitty
 var playerWithCurrentTurn="black";
 var testingArray=gameBoard2dArray;
 function flipCoins(gameBoard2Array){
@@ -71,6 +72,121 @@ function flipCoins(gameBoard2Array){
         }
     }
 
+
+function checkForValidEntry(){
+
+    if ($(this).attr('value') === "blank"){
+        var valueClicked = $(this).attr('value');
+        var rowClicked = parseInt($(this).attr('row'));
+        var columnClicked = parseInt($(this).attr('column'));
+        checkHorizontal(rowClicked,columnClicked);
+        checkVertical(rowClicked,columnClicked);
+        checkDiagonal(rowClicked,columnClicked);
+    }else{
+        return;
+    }
+    function checkHorizontal() {
+        var currentPosition;
+        var searchExtender;
+
+        if ( gameBoard2dArray[rowClicked][(columnClicked +1)] === "blank" || gameBoard2dArray[rowClicked][columnClicked+1] === valueClicked){
+            console.log('not valid');
+        }
+        else {
+            searchExtender = 2;
+            for (currentPosition = columnClicked + 1; currentPosition <= 7; currentPosition++) {
+                if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === "blank") {
+                    return;
+                }
+                if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === "black") {
+                    console.log('this is a valid spot');
+                    return;
+                }
+                else {
+                    searchExtender++;
+                }
+            }
+        }
+        if ( gameBoard2dArray[rowClicked][(columnClicked -1)] === "blank" || gameBoard2dArray[rowClicked][columnClicked-1] === valueClicked){
+            console.log('not valid');
+        }
+        else{
+            searchExtender= 2;
+            for(currentPosition = columnClicked -1; currentPosition >= 0; currentPosition--) {
+                if (gameBoard2dArray[rowClicked][columnClicked - searchExtender] === "blank") {
+                    return;
+                }
+                if (gameBoard2dArray[rowClicked][columnClicked - searchExtender] === "black") {
+                    console.log('this is a valid spot');
+                    return;
+                }
+                else {
+                    searchExtender++;
+                }
+            }
+        }
+    }
+
+    function checkVertical(){
+        var currentPosition;
+        var searchExtender;
+
+        if ( gameBoard2dArray[rowClicked+1][(columnClicked)] === "blank" || gameBoard2dArray[rowClicked+1][columnClicked] === valueClicked){
+            console.log('not valid');
+        }
+        else {
+            searchExtender = 2;
+            for (currentPosition = rowClicked + 1; currentPosition <= 7; currentPosition++) {
+                if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === "blank") {
+                    return;
+                }
+                if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === "black") {
+                    console.log('this is a valid spot');
+                    return;
+                }
+                else {
+                    searchExtender++;
+                }
+            }
+        }
+        if ( gameBoard2dArray[rowClicked-1][(columnClicked)] === "blank" || gameBoard2dArray[rowClicked-1][columnClicked] === valueClicked){
+            console.log('not valid');
+        }
+        else{
+            searchExtender= 2;
+            for(currentPosition = columnClicked -1; currentPosition >= 0; currentPosition--){
+                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked] === "blank"){
+                    return;
+                }
+                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked] === "black"){
+                    console.log('this is a valid spot');
+                    return;
+                }
+                else{
+                    searchExtender++;
+                }
+            }
+        }
+    }
+    function checkDiagonal(){
+
+    }
+}
+
+
+
+function middleSquares() {
+    pieceClassArray = [ "white", "black"];
+    $( "[row=3][column=3]" ).addClass(pieceClassArray[0]).attr("value","white");
+    gameBoard2dArray[3][3] = "white";
+    $( "[row=3][column=4]" ).addClass(pieceClassArray[1]).attr("value","black");
+    gameBoard2dArray[3][4] = "black";
+    $( "[row=4][column=3]" ).addClass(pieceClassArray[1]).attr("value","black");
+    gameBoard2dArray[4][3] = "black";
+    $( "[row=4][column=4]" ).addClass(pieceClassArray[0]).attr("value","white");
+    gameBoard2dArray[4][4] = "white";
+
+    //could add randomization later to order of starting chips
 }
 
 // function testingClassToggle(){
@@ -88,6 +204,20 @@ function determineWhichClassOfCoinDivsWillAdopt(){
 // function middleSquares() {
 //     $("div").attr("row","3");
 // }
+
+
+function resetGame() {
+    //reset all variables
+
+}
+
+function changeArray() {
+    //change Array when dom changes
+    gameBoard2dArray[$(this).attr("row")][$(this).attr("column")] = $(this).attr("value");
+    console.log(this)
+}
+
+//need function to tell which player clicked last
 
 
 
