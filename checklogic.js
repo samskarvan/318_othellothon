@@ -4,8 +4,8 @@ function checkForValidEntry(){
 
     if (this.value=== undefined){
         var valueClicked = this;
-        var rowClicked = this.attr('row');
-        var columnClicked = this.attr('column');
+        var rowClicked = $(this).attr('row');
+        var columnClicked = $(this).attr('column');
         checkHorizontal(rowClicked,columnClicked);
         checkVertical(rowClicked,columnClicked);
         checkDiagonal(rowClicked,columnClicked);
@@ -27,7 +27,7 @@ function checkForValidEntry(){
                     return;
                 }
                 if(gameBoard2dArr[rowClicked][columnClicked+k].value === valueClicked){
-                    //valid spot
+                    console.log('this is a valid spot');
                     return;
                 }
                 else{

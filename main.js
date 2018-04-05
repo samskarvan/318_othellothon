@@ -21,7 +21,7 @@ function createGameBoard(columnAmount, rowAmount) {
             value: "blank",
             row: rowCountFirst,
             column: 0,
-            click: createPieces //put Andrew's function here
+            click: checkForValidEntry
         }));
         gameBoard2dArray.push([]);
         gameBoard2dArray[rowCountFirst].push(newFirstSquareOfRow[0].attributes.value.nodeValue);
@@ -34,7 +34,7 @@ function createGameBoard(columnAmount, rowAmount) {
                 value: "blank",
                 row: rowCountBuild,
                 column: columnCountBuild,
-                click: createPieces //put Andrew's function here
+                click: checkForValidEntry
             }));
             gameBoard.append(newSquare);
             gameBoard2dArray[rowCountBuild].push(newSquare[0].attributes.value.nodeValue);
@@ -53,7 +53,94 @@ function createPieces() {
     $(this).addClass("front", "border-highlight");
 }
 
-//based on whose turn it is, white kitty and black kitty
+function checkForValidEntry(){
+
+    if ($(this).attr('value') === "blank"){
+        var valueClicked = $(this).attr('value');
+        var rowClicked = parseInt($(this).attr('row'));
+        var columnClicked = parseInt($(this).attr('column'));
+        checkHorizontal(rowClicked,columnClicked);
+        checkVertical(rowClicked,columnClicked);
+        checkDiagonal(rowClicked,columnClicked);
+    }else{
+        return;
+    }
+    function checkHorizontal() {
+        var i;
+        var k;
+
+        if ( gameBoard2dArray[rowClicked][(columnClicked +1)] === "blank" || gameBoard2dArray[rowClicked][columnClicked+1] === valueClicked){
+            return;
+        }
+        else{
+            k= 2;
+            for(i = columnClicked +1; i <= 7; i++){
+                if(gameBoard2dArray[rowClicked][columnClicked+k] === "blank"){
+                    return;
+                }
+                if(gameBoard2dArray[rowClicked][columnClicked+k] === valueClicked){
+                    console.log('this is a valid spot');
+                    return;
+                }
+                else{
+                    k++;
+                }
+            }
+            k= -2;
+            for(i = columnClicked -1; i >= 0; i--){
+                if(gameBoard2dArray[rowClicked][columnClicked-k] === "blank"){
+                    return;
+                }
+                if(gameBoard2dArray[rowClicked][columnClicked-k] === valueClicked){
+                    console.log('this is a valid spot');
+                    return;
+                }
+                else{
+                    k--;
+                }
+            }
+        }
+    }
+    function checkVertical(){
+        var i;
+        var k;
+
+        if ( gameBoard2dArray[rowClicked+1][(columnClicked)] === "blank" || gameBoard2dArray[rowClicked+1][columnClicked] === valueClicked){
+            return;
+        }
+        else{
+            k= 2;
+            for(i = rowClicked +1; i <= 7; i++){
+                if(gameBoard2dArray[rowClicked+k][columnClicked] === "blank"){
+                    return;
+                }
+                if(gameBoard2dArray[rowClicked+k][columnClicked] === valueClicked){
+                    console.log('this is a valid spot');
+                    return;
+                }
+                else{
+                    k++;
+                }
+            }
+            k= -2;
+            for(i = columnClicked -1; i >= 0; i--){
+                if(gameBoard2dArray[rowClicked-k][columnClicked] === "blank"){
+                    return;
+                }
+                if(gameBoard2dArray[rowClicked-k][columnClicked] === valueClicked){
+                    console.log('this is a valid spot');
+                    return;
+                }
+                else{
+                    k--;
+                }
+            }
+        }
+    }
+    function checkDiagonal(){
+
+    }
+}
 
 function middleSquares() {
     pieceClassArray = [ "white", "black"]
