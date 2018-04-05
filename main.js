@@ -82,7 +82,6 @@ function flipCoins(array) {
         }
 }
 
-
 function checkForValidEntry(){
     var holdTheOb = this;
 
@@ -102,77 +101,56 @@ function checkForValidEntry(){
         var currentPosition;
         var searchExtender;
 
+        // Right Horizontal Check
+        if (columnClicked + 1 <= 7) {
 
-            // Right Horizontal Check
-        if((rowClicked - 1) < 0) {
-            rowClicked = 1;
-        }
-        if ((columnClicked - 1) < 0) {
-            columnClicked = 1;
-        }
-        if((rowClicked + 1) > 7) {
-            rowClicked = 6;
-        }
-        if((columnClicked + 1) > 7) {
-            columnClicked = 6;
-        }
-        if ( gameBoard2dArray[rowClicked][(columnClicked +1)] === "not-clicked" || gameBoard2dArray[rowClicked][columnClicked+1] === playerWithCurrentTurn){
+            if (gameBoard2dArray[rowClicked][(columnClicked + 1)] === "not-clicked" || gameBoard2dArray[rowClicked][columnClicked + 1] === playerWithCurrentTurn) {
+                console.log('not valid');
+            }
+            else {
+                coinFlipArray.push(holdTheOb);
+                coinFlipArray.push($("[row=" + rowClicked + "][column=" + (columnClicked + 1) + "]")[0]);
+                searchExtender = 2;
+                for (currentPosition = columnClicked + 1; currentPosition <= 7; currentPosition++) {
+                    if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === "not-clicked") {
+                        coinFlipArray.splice(coinFlipArray.length - searchExtender, searchExtender);
+                        return;
+                    }
+                    if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === playerWithCurrentTurn) {
+                        console.log('this is a valid spot');
 
-            console.log('not valid');
-        }
-        else {
-            coinFlipArray.push(holdTheOb);
-            coinFlipArray.push($( "[row="+rowClicked+"][column="+(columnClicked+1)+"]" )[0]);
-            searchExtender = 2;
-            for (currentPosition = columnClicked + 1; currentPosition <= 7; currentPosition++) {
-                if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === "not-clicked") {
-                    coinFlipArray.splice(coinFlipArray.length-searchExtender, searchExtender);
-                    return;
-                }
-                if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === playerWithCurrentTurn) {
-                    console.log('this is a valid spot');
-
-                    return;
-                }
-                else {
-                    coinFlipArray.push($( "[row="+rowClicked+"][column="+(columnClicked+searchExtender)+"]" )[0]);
-                    searchExtender++;
+                        return;
+                    }
+                    else {
+                        coinFlipArray.push($("[row=" + rowClicked + "][column=" + (columnClicked + searchExtender) + "]")[0]);
+                        searchExtender++;
+                    }
                 }
             }
         }
-            // Left Horizontal Check
-        if((rowClicked - 1) < 0) {
-            rowClicked = 1;
-        }
-        if ((columnClicked - 1) < 0) {
-            columnClicked = 1;
-        }
-        if((rowClicked + 1) > 7) {
-            rowClicked = 6;
-        }
-        if((columnClicked + 1) > 7) {
-            columnClicked = 6;
-        }
-        if ( gameBoard2dArray[rowClicked][(columnClicked -1)] === "not-clicked" || gameBoard2dArray[rowClicked][columnClicked-1] === playerWithCurrentTurn){
-            console.log('not valid');
-        }
-        else{
-            coinFlipArray.push(holdTheOb);
-            coinFlipArray.push($( "[row="+rowClicked+"][column="+(columnClicked-1)+"]" )[0]);
+        // Left Horizontal Check
+        if (columnClicked - 1 >= 0) {
+            if (gameBoard2dArray[rowClicked][(columnClicked - 1)] === "not-clicked" || gameBoard2dArray[rowClicked][columnClicked - 1] === playerWithCurrentTurn) {
+                console.log('not valid');
+            }
+            else {
+                coinFlipArray.push(holdTheOb);
+                coinFlipArray.push($("[row=" + rowClicked + "][column=" + (columnClicked - 1) + "]")[0]);
 
-            searchExtender= 2;
-            for(currentPosition = columnClicked -1; currentPosition >= 0; currentPosition--) {
-                if (gameBoard2dArray[rowClicked][columnClicked - searchExtender] === "not-clicked") {
-                    coinFlipArray.splice(coinFlipArray.length-searchExtender, searchExtender);
-                    return;
-                }
-                if (gameBoard2dArray[rowClicked][columnClicked - searchExtender] === playerWithCurrentTurn) {
-                    console.log('this is a valid spot');
-                    return;
-                }
-                else {
-                        coinFlipArray.push($( "[row="+rowClicked+"][column="+(columnClicked-searchExtender)+"]" )[0]);
-                    searchExtender++;
+                searchExtender = 2;
+                for (currentPosition = columnClicked - 1; currentPosition >= 0; currentPosition--) {
+                    if (gameBoard2dArray[rowClicked][columnClicked - searchExtender] === "not-clicked") {
+                        coinFlipArray.splice(coinFlipArray.length - searchExtender, searchExtender);
+                        return;
+                    }
+                    if (gameBoard2dArray[rowClicked][columnClicked - searchExtender] === playerWithCurrentTurn) {
+                        console.log('this is a valid spot');
+                        return;
+                    }
+                    else {
+                        coinFlipArray.push($("[row=" + rowClicked + "][column=" + (columnClicked - searchExtender) + "]")[0]);
+                        searchExtender++;
+                    }
                 }
             }
         }
@@ -182,73 +160,53 @@ function checkForValidEntry(){
         var currentPosition;
         var searchExtender;
 
-            // Bottom Vertical Check
-        if((rowClicked - 1) < 0) {
-            rowClicked = 1;
-        }
-        if ((columnClicked - 1) < 0) {
-            columnClicked = 1;
-        }
-        if((rowClicked + 1) > 7) {
-            rowClicked = 6;
-        }
-        if((columnClicked + 1) > 7) {
-            columnClicked = 6;
-        }
-        if ( gameBoard2dArray[rowClicked+1][(columnClicked)] === "not-clicked" || gameBoard2dArray[rowClicked+1][columnClicked] === playerWithCurrentTurn){
-            console.log('not valid');
-        }
-        else {
-            coinFlipArray.push(holdTheOb);
-            coinFlipArray.push($( "[row="+(rowClicked+1)+"][column="+columnClicked+"]" )[0]);
-            searchExtender = 2;
-            for (currentPosition = rowClicked + 1; currentPosition <= 7; currentPosition++) {
-                if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === "not-clicked") {
-                    coinFlipArray.splice(coinFlipArray.length-searchExtender, searchExtender);
-                    return;
-                }
-                if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === playerWithCurrentTurn) {
-                    console.log('this is a valid spot');
-                    return;
-                }
-                else {
-                    coinFlipArray.push($( "[row="+(rowClicked+searchExtender)+"][column="+columnClicked+"]" )[0]);
-                    searchExtender++;
+        // Bottom Vertical Check
+        if (rowClicked+1 <= 7) {
+            if (gameBoard2dArray[rowClicked + 1][(columnClicked)] === "not-clicked" || gameBoard2dArray[rowClicked + 1][columnClicked] === playerWithCurrentTurn) {
+                console.log('not valid');
+            }
+            else {
+                coinFlipArray.push(holdTheOb);
+                coinFlipArray.push($("[row=" + (rowClicked + 1) + "][column=" + columnClicked + "]")[0]);
+                searchExtender = 2;
+                for (currentPosition = rowClicked + 1; currentPosition <= 7; currentPosition++) {
+                    if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === "not-clicked") {
+                        coinFlipArray.splice(coinFlipArray.length - searchExtender, searchExtender);
+                        return;
+                    }
+                    if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === playerWithCurrentTurn) {
+                        console.log('this is a valid spot');
+                        return;
+                    }
+                    else {
+                        coinFlipArray.push($("[row=" + (rowClicked + searchExtender) + "][column=" + columnClicked + "]")[0]);
+                        searchExtender++;
+                    }
                 }
             }
         }
-            // Top Vertical Check
-        if((rowClicked - 1) < 0) {
-            rowClicked = 1;
-        }
-        if ((columnClicked - 1) < 0) {
-            columnClicked = 1;
-        }
-        if((rowClicked + 1) > 7) {
-            rowClicked = 6;
-        }
-        if((columnClicked + 1) > 7) {
-            columnClicked = 6;
-        }
-        if ( gameBoard2dArray[rowClicked-1][(columnClicked)] === "not-clicked" || gameBoard2dArray[rowClicked-1][columnClicked] === playerWithCurrentTurn){
-            console.log('not valid');
-        }
-        else{
-            coinFlipArray.push(holdTheOb);
-            coinFlipArray.push($( "[row="+(rowClicked-1)+"][column="+columnClicked+"]" )[0]);
-            searchExtender= 2;
-            for(currentPosition = columnClicked -1; currentPosition >= 0; currentPosition--){
-                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked] === "not-clicked"){
-                    coinFlipArray.splice(coinFlipArray.length-searchExtender, searchExtender);
-                    return;
-                }
-                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked] === playerWithCurrentTurn){
-                    console.log('this is a valid spot');
-                    return;
-                }
-                else{
-                    coinFlipArray.push($( "[row="+(rowClicked-searchExtender)+"][column="+columnClicked+"]" )[0]);
-                    searchExtender++;
+        // Top Vertical Check
+        if((rowClicked - 1) >= 0) {
+            if (gameBoard2dArray[rowClicked - 1][(columnClicked)] === "not-clicked" || gameBoard2dArray[rowClicked - 1][columnClicked] === playerWithCurrentTurn) {
+                console.log('not valid');
+            }
+            else {
+                coinFlipArray.push(holdTheOb);
+                coinFlipArray.push($("[row=" + (rowClicked - 1) + "][column=" + columnClicked + "]")[0]);
+                searchExtender = 2;
+                for (currentPosition = columnClicked - 1; currentPosition >= 0; currentPosition--) {
+                    if (gameBoard2dArray[rowClicked - searchExtender][columnClicked] === "not-clicked") {
+                        coinFlipArray.splice(coinFlipArray.length - searchExtender, searchExtender);
+                        return;
+                    }
+                    if (gameBoard2dArray[rowClicked - searchExtender][columnClicked] === playerWithCurrentTurn) {
+                        console.log('this is a valid spot');
+                        return;
+                    }
+                    else {
+                        coinFlipArray.push($("[row=" + (rowClicked - searchExtender) + "][column=" + columnClicked + "]")[0]);
+                        searchExtender++;
+                    }
                 }
             }
         }
@@ -259,146 +217,107 @@ function checkForValidEntry(){
         var searchExtender;
 
         // bottom right diagonal check
-        if((rowClicked - 1) < 0) {
-            rowClicked = 1;
-        }
-        if ((columnClicked - 1) < 0) {
-            columnClicked = 1;
-        }
-        if((rowClicked + 1) > 7) {
-            rowClicked = 6;
-        }
-        if((columnClicked + 1) > 7) {
-            columnClicked = 6;
-        }
-        if ( gameBoard2dArray[rowClicked+1][(columnClicked+1)] === "not-clicked" || gameBoard2dArray[rowClicked+1][columnClicked+1] === playerWithCurrentTurn){
-            console.log('not valid');
-        }
-        else{
-            coinFlipArray.push(holdTheOb);
-            coinFlipArray.push($( "[row="+(rowClicked+1)+"][column="+(columnClicked+1)+"]" )[0]);
-            var greaterNumber = Math.max(rowClicked, columnClicked);
-            searchExtender= 2;
-            for(currentPosition = greaterNumber +1; currentPosition <= 7; currentPosition++){
-                if(gameBoard2dArray[rowClicked+searchExtender][columnClicked+searchExtender] === "not-clicked"){
-                    coinFlipArray.splice(coinFlipArray.length-searchExtender, searchExtender);
-                    return;
-                }
-                if(gameBoard2dArray[rowClicked+searchExtender][columnClicked+searchExtender] === playerWithCurrentTurn){
-                    console.log('this is a valid spot');
-                    return;
-                }
-                else{
-                    coinFlipArray.push($( "[row="+(rowClicked+searchExtender)+"][column="+(columnClicked+searchExtender)+"]" )[0]);
-                    searchExtender++;
+        if(columnClicked + 1 <= 7 && rowClicked+1 <=7) {
+            if (gameBoard2dArray[rowClicked + 1][(columnClicked + 1)] === "not-clicked" || gameBoard2dArray[rowClicked + 1][columnClicked + 1] === playerWithCurrentTurn) {
+                console.log('not valid');
+            }
+            else {
+                coinFlipArray.push(holdTheOb);
+                coinFlipArray.push($("[row=" + (rowClicked + 1) + "][column=" + (columnClicked + 1) + "]")[0]);
+                var greaterNumber = Math.max(rowClicked, columnClicked);
+                searchExtender = 2;
+                for (currentPosition = greaterNumber + 1; currentPosition <= 7; currentPosition++) {
+                    //this is where you added some shit alia
+                    if (gameBoard2dArray[rowClicked + searchExtender] && gameBoard2dArray[rowClicked + searchExtender][columnClicked + searchExtender] &&  gameBoard2dArray[rowClicked + searchExtender][columnClicked + searchExtender] === "not-clicked" ) {
+                        coinFlipArray.splice(coinFlipArray.length - searchExtender, searchExtender);
+                        return;
+                    }
+                    if (gameBoard2dArray[rowClicked + searchExtender][columnClicked + searchExtender] === playerWithCurrentTurn) {
+                        console.log('this is a valid spot');
+                        return;
+                    }
+                    else {
+                        coinFlipArray.push($("[row=" + (rowClicked + searchExtender) + "][column=" + (columnClicked + searchExtender) + "]")[0]);
+                        searchExtender++;
+                    }
                 }
             }
         }
         // top right diagonal check
-        if((rowClicked - 1) < 0) {
-            rowClicked = 1;
-        }
-        if ((columnClicked - 1) < 0) {
-            columnClicked = 1;
-        }
-        if((rowClicked + 1) > 7) {
-            rowClicked = 6;
-        }
-        if((columnClicked + 1) > 7) {
-            columnClicked = 6;
-        }
-        if ( gameBoard2dArray[rowClicked-1][(columnClicked+1)] === "not-clicked" || gameBoard2dArray[rowClicked-1][columnClicked+1] === playerWithCurrentTurn){
-            console.log('not valid');
-        }
-        else{
+        if(columnClicked - 1 >= 0 && rowClicked+1 <=7) {
+            if (gameBoard2dArray[rowClicked - 1][(columnClicked + 1)] === "not-clicked" || gameBoard2dArray[rowClicked - 1][columnClicked + 1] === playerWithCurrentTurn) {
+                console.log('not valid');
+            }
+            else {
 
-            coinFlipArray.push(holdTheOb);
-            coinFlipArray.push($( "[row="+(rowClicked-1)+"][column="+(columnClicked+1)+"]" )[0]);
+                coinFlipArray.push(holdTheOb);
+                coinFlipArray.push($("[row=" + (rowClicked - 1) + "][column=" + (columnClicked + 1) + "]")[0]);
 
-            searchExtender= 2;
-            for(currentPosition = columnClicked +1, currentPosition2 = rowClicked-1; currentPosition <= 7 && currentPosition2 >=0; currentPosition++, currentPosition2--){
-                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked+searchExtender] === "not-clicked"){
-                    coinFlipArray.splice(coinFlipArray.length-searchExtender, searchExtender);
-                    return;
-                }
-                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked+searchExtender] === playerWithCurrentTurn){
-                    console.log('this is a valid spot');
-                    return;
-                }
-                else{
-                    coinFlipArray.push($( "[row="+(rowClicked-searchExtender)+"][column="+(columnClicked+searchExtender)+"]" )[0]);
-                    searchExtender++;
+                searchExtender = 2;
+                for (currentPosition = columnClicked + 1, currentPosition2 = rowClicked - 1; currentPosition <= 7 && currentPosition2 >= 0; currentPosition++, currentPosition2--) {
+                    if (gameBoard2dArray[rowClicked - searchExtender][columnClicked + searchExtender] === "not-clicked") {
+                        coinFlipArray.splice(coinFlipArray.length - searchExtender, searchExtender);
+                        return;
+                    }
+                    if (gameBoard2dArray[rowClicked - searchExtender][columnClicked + searchExtender] === playerWithCurrentTurn) {
+                        console.log('this is a valid spot');
+                        return;
+                    }
+                    else {
+                        coinFlipArray.push($("[row=" + (rowClicked - searchExtender) + "][column=" + (columnClicked + searchExtender) + "]")[0]);
+                        searchExtender++;
+                    }
                 }
             }
         }
         // top left diagonal check
-        if((rowClicked - 1) < 0) {
-            rowClicked = 1;
-        }
-        if ((columnClicked - 1) < 0) {
-            columnClicked = 1;
-        }
-        if((rowClicked + 1) > 7) {
-            rowClicked = 6;
-        }
-        if((columnClicked + 1) > 7) {
-            columnClicked = 6;
-        }
-        if ( gameBoard2dArray[rowClicked-1][(columnClicked-1)] === "not-clicked" || gameBoard2dArray[rowClicked-1][columnClicked-1] === playerWithCurrentTurn){
-            console.log('not valid');
-        }
-        else{
-            coinFlipArray.push(holdTheOb);
-            coinFlipArray.push($( "[row="+(rowClicked-1)+"][column="+(columnClicked-1)+"]" )[0]);
-            var lesserNumber = Math.min(rowClicked, columnClicked);
-            searchExtender= 2;
-            for(currentPosition = lesserNumber -1; currentPosition >= 0; currentPosition--){
-                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked-searchExtender] === "not-clicked"){
-                    coinFlipArray.splice(coinFlipArray.length-searchExtender, searchExtender);
-                    return;
-                }
-                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked-searchExtender] === playerWithCurrentTurn){
-                    console.log('this is a valid spot');
-                    return;
-                }
-                else{
-                    coinFlipArray.push($( "[row="+(rowClicked-searchExtender)+"][column="+(columnClicked-searchExtender)+"]" )[0]);
-                    searchExtender++;
+        if(columnClicked - 1 >= 0 && rowClicked - 1  >= 0 ) {
+            if (gameBoard2dArray[rowClicked - 1][(columnClicked - 1)] === "not-clicked" || gameBoard2dArray[rowClicked - 1][columnClicked - 1] === playerWithCurrentTurn) {
+                console.log('not valid');
+            }
+            else {
+                coinFlipArray.push(holdTheOb);
+                coinFlipArray.push($("[row=" + (rowClicked - 1) + "][column=" + (columnClicked - 1) + "]")[0]);
+                var lesserNumber = Math.min(rowClicked, columnClicked);
+                searchExtender = 2;
+                for (currentPosition = lesserNumber - 1; currentPosition >= 0; currentPosition--) {
+                    if (gameBoard2dArray[rowClicked - searchExtender][columnClicked - searchExtender] === "not-clicked") {
+                        coinFlipArray.splice(coinFlipArray.length - searchExtender, searchExtender);
+                        return;
+                    }
+                    if (gameBoard2dArray[rowClicked - searchExtender][columnClicked - searchExtender] === playerWithCurrentTurn) {
+                        console.log('this is a valid spot');
+                        return;
+                    }
+                    else {
+                        coinFlipArray.push($("[row=" + (rowClicked - searchExtender) + "][column=" + (columnClicked - searchExtender) + "]")[0]);
+                        searchExtender++;
+                    }
                 }
             }
         }
         // bottom left diagonal check
-        if((rowClicked - 1) < 0) {
-            rowClicked = 1;
-        }
-        if ((columnClicked - 1) < 0) {
-            columnClicked = 1;
-        }
-        if((rowClicked + 1) > 7) {
-            rowClicked = 6;
-        }
-        if((columnClicked + 1) > 7) {
-            columnClicked = 6;
-        }
-        if ( gameBoard2dArray[rowClicked+1][(columnClicked-1)] === "not-clicked" || gameBoard2dArray[rowClicked+1][columnClicked-1] === playerWithCurrentTurn){
-            console.log('not valid');
-        }
-        else{
-            coinFlipArray.push(holdTheOb);
-            coinFlipArray.push($( "[row="+(rowClicked+1)+"][column="+(columnClicked-1)+"]" )[0]);
-            searchExtender= 2;
-            for(currentPosition = columnClicked -1, currentPosition2 = rowClicked+1; currentPosition >= 0 && currentPosition2 <= 7; currentPosition--, rowClicked++){
-                if(gameBoard2dArray[rowClicked+searchExtender][columnClicked-searchExtender] === "not-clicked"){
-                    coinFlipArray.splice(coinFlipArray.length-searchExtender, searchExtender);
-                    return;
-                }
-                if(gameBoard2dArray[rowClicked+searchExtender][columnClicked-searchExtender] === playerWithCurrentTurn){
-                    console.log('this is a valid spot');
-                    return;
-                }
-                else{
-                    coinFlipArray.push($( "[row="+(rowClicked+searchExtender)+"][column="+(columnClicked-searchExtender)+"]" )[0]);
-                    searchExtender++;
+        if(columnClicked - 1 >= 0 && rowClicked + 1 <= 7) {
+            if (gameBoard2dArray[rowClicked + 1][(columnClicked - 1)] === "not-clicked" || gameBoard2dArray[rowClicked + 1][columnClicked - 1] === playerWithCurrentTurn) {
+                console.log('not valid');
+            }
+            else {
+                coinFlipArray.push(holdTheOb);
+                coinFlipArray.push($("[row=" + (rowClicked + 1) + "][column=" + (columnClicked - 1) + "]")[0]);
+                searchExtender = 2;
+                for (currentPosition = columnClicked - 1, currentPosition2 = rowClicked + 1; currentPosition >= 0 && currentPosition2 <= 7; currentPosition--, rowClicked++) {
+                    if (gameBoard2dArray[rowClicked + searchExtender][columnClicked - searchExtender] === "not-clicked") {
+                        coinFlipArray.splice(coinFlipArray.length - searchExtender, searchExtender);
+                        return;
+                    }
+                    if (gameBoard2dArray[rowClicked + searchExtender][columnClicked - searchExtender] === playerWithCurrentTurn) {
+                        console.log('this is a valid spot');
+                        return;
+                    }
+                    else {
+                        coinFlipArray.push($("[row=" + (rowClicked + searchExtender) + "][column=" + (columnClicked - searchExtender) + "]")[0]);
+                        searchExtender++;
+                    }
                 }
             }
         }
