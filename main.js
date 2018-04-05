@@ -67,73 +67,84 @@ function checkForValidEntry(){
         return;
     }
     function checkHorizontal() {
-        var i;
-        var k;
+        var currentPosition;
+        var searchExtender;
 
         if ( gameBoard2dArray[rowClicked][(columnClicked +1)] === "blank" || gameBoard2dArray[rowClicked][columnClicked+1] === valueClicked){
-            return;
+            console.log('not valid');
         }
-        else{
-            k= 2;
-            for(i = columnClicked +1; i <= 7; i++){
-                if(gameBoard2dArray[rowClicked][columnClicked+k] === "blank"){
+        else {
+            searchExtender = 2;
+            for (currentPosition = columnClicked + 1; currentPosition <= 7; currentPosition++) {
+                if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === "blank") {
                     return;
                 }
-                if(gameBoard2dArray[rowClicked][columnClicked+k] === valueClicked){
+                if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === "black") {
                     console.log('this is a valid spot');
                     return;
                 }
-                else{
-                    k++;
+                else {
+                    searchExtender++;
                 }
             }
-            k= -2;
-            for(i = columnClicked -1; i >= 0; i--){
-                if(gameBoard2dArray[rowClicked][columnClicked-k] === "blank"){
+        }
+        if ( gameBoard2dArray[rowClicked][(columnClicked -1)] === "blank" || gameBoard2dArray[rowClicked][columnClicked-1] === valueClicked){
+            console.log('not valid');
+        }
+        else{
+            searchExtender= 2;
+            for(currentPosition = columnClicked -1; currentPosition >= 0; currentPosition--) {
+                if (gameBoard2dArray[rowClicked][columnClicked - searchExtender] === "blank") {
                     return;
                 }
-                if(gameBoard2dArray[rowClicked][columnClicked-k] === valueClicked){
+                if (gameBoard2dArray[rowClicked][columnClicked - searchExtender] === "black") {
                     console.log('this is a valid spot');
                     return;
                 }
-                else{
-                    k--;
+                else {
+                    searchExtender++;
                 }
             }
         }
     }
+
     function checkVertical(){
-        var i;
-        var k;
+        var currentPosition;
+        var searchExtender;
 
         if ( gameBoard2dArray[rowClicked+1][(columnClicked)] === "blank" || gameBoard2dArray[rowClicked+1][columnClicked] === valueClicked){
-            return;
+            console.log('not valid');
         }
-        else{
-            k= 2;
-            for(i = rowClicked +1; i <= 7; i++){
-                if(gameBoard2dArray[rowClicked+k][columnClicked] === "blank"){
+        else {
+            searchExtender = 2;
+            for (currentPosition = rowClicked + 1; currentPosition <= 7; currentPosition++) {
+                if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === "blank") {
                     return;
                 }
-                if(gameBoard2dArray[rowClicked+k][columnClicked] === valueClicked){
+                if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === "black") {
                     console.log('this is a valid spot');
                     return;
                 }
-                else{
-                    k++;
+                else {
+                    searchExtender++;
                 }
             }
-            k= -2;
-            for(i = columnClicked -1; i >= 0; i--){
-                if(gameBoard2dArray[rowClicked-k][columnClicked] === "blank"){
+        }
+        if ( gameBoard2dArray[rowClicked-1][(columnClicked)] === "blank" || gameBoard2dArray[rowClicked-1][columnClicked] === valueClicked){
+            console.log('not valid');
+        }
+        else{
+            searchExtender= 2;
+            for(currentPosition = columnClicked -1; currentPosition >= 0; currentPosition--){
+                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked] === "blank"){
                     return;
                 }
-                if(gameBoard2dArray[rowClicked-k][columnClicked] === valueClicked){
+                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked] === "black"){
                     console.log('this is a valid spot');
                     return;
                 }
                 else{
-                    k--;
+                    searchExtender++;
                 }
             }
         }
@@ -142,6 +153,8 @@ function checkForValidEntry(){
 
     }
 }
+
+
 
 function middleSquares() {
     pieceClassArray = [ "white", "black"];
@@ -156,6 +169,7 @@ function middleSquares() {
 
     //could add randomization later to order of starting chips
 }
+
 
 function resetGame() {
     //reset all variables
