@@ -8,6 +8,7 @@ middleSquares();
 
 }
 
+var currentPlayer = "black";
 var gameBoard2dArray = [];
 
 function createGameBoard(columnAmount, rowAmount) {
@@ -143,17 +144,31 @@ function checkForValidEntry(){
 }
 
 function middleSquares() {
-    pieceClassArray = [ "white", "black"]
-    $( "[row=3][column=3]" ).addClass(pieceClassArray[0])
-    $( "[row=3][column=4]" ).addClass(pieceClassArray[1])
-    $( "[row=4][column=3]" ).addClass(pieceClassArray[1])
-    $( "[row=4][column=4]" ).addClass(pieceClassArray[0])
+    pieceClassArray = [ "white", "black"];
+    $( "[row=3][column=3]" ).addClass(pieceClassArray[0]).attr("value","white");
+    gameBoard2dArray[3][3] = "white";
+    $( "[row=3][column=4]" ).addClass(pieceClassArray[1]).attr("value","black");
+    gameBoard2dArray[3][4] = "black";
+    $( "[row=4][column=3]" ).addClass(pieceClassArray[1]).attr("value","black");
+    gameBoard2dArray[4][3] = "black";
+    $( "[row=4][column=4]" ).addClass(pieceClassArray[0]).attr("value","white");
+    gameBoard2dArray[4][4] = "white";
+
     //could add randomization later to order of starting chips
 }
 
 function resetGame() {
-    
+    //reset all variables
+
 }
+
+function changeArray() {
+    //change Array when dom changes
+    gameBoard2dArray[$(this).attr("row")][$(this).attr("column")] = $(this).attr("value");
+    console.log(this)
+}
+
+//need function to tell which player clicked last
 
 
 
