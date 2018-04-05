@@ -101,8 +101,25 @@ function checkForValidEntry(){
         var currentPosition;
         var searchExtender;
 
+
             // Right Horizontal Check
         if (columnClicked + 1 <= 7) {
+        if ( gameBoard2dArray[rowClicked][(columnClicked +1)] === "not-clicked" || gameBoard2dArray[rowClicked][columnClicked+1] === playerWithCurrentTurn){
+
+            console.log('not valid');
+        }
+        else {
+            coinFlipArray.push(holdTheOb);
+            coinFlipArray.push($( "[row="+rowClicked+"][column="+(columnClicked+1)+"]" )[0]);
+            searchExtender = 2;
+            for (currentPosition = columnClicked + 1; currentPosition <= 7; currentPosition++) {
+                if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === "not-clicked") {
+                    coinFlipArray.splice(coinFlipArray.length-searchExtender, searchExtender);
+                    return;
+                }
+                if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === playerWithCurrentTurn) {
+                    console.log('this is a valid spot');
+
 
             if (gameBoard2dArray[rowClicked][(columnClicked + 1)] === "not-clicked" || gameBoard2dArray[rowClicked][columnClicked + 1] === playerWithCurrentTurn) {
                 console.log('not valid');
