@@ -8,8 +8,9 @@ middleSquares();
 
 }
 
-var currentPlayer = "black";
+var playerWithCurrentTurn = "black";
 var gameBoard2dArray = [];
+var coinFlipArray = [];
 
 function createGameBoard(columnAmount, rowAmount) {
     var gameBoard = $("#game-area");
@@ -54,16 +55,11 @@ function createPieces() {
     $(this).addClass("front", "border-highlight");
 }
 
-var playerWithCurrentTurn="black";
-var testingArray=gameBoard2dArray;
-function flipCoins(gameBoard2Array) {
-    //since we don't have ai functionality, user will play for both teams, so default turn will be set to black
-    //turn all values in the array to the value of the current turn - call flip function
-    //change current player to white after flipping has occured (at end of function)
+
+function flipCoins(array) {
     var coinsToBeFlippedIndex = 0;
     while (coinsToBeFlippedIndex < array.length) {
-        // array[coinsToBeFlippedIndex] flip animation--should divs start with all coin classes at different z indexs and then toggle higher/lower index classes on flip?
-        array[coinsToBeFlippedIndex].toggleClass(playerWithCurrentTurn);//class of coin whose turn it is-white or black//);
+        array[coinsToBeFlippedIndex].toggleClass(playerWithCurrentTurn);
         coinsToBeFlippedIndex++;
         if (playerWithCurrentTurn === "black") {
             playerWithCurrentTurn = "white";
@@ -90,10 +86,13 @@ function checkForValidEntry(){
         var currentPosition;
         var searchExtender;
 
+
         if ( gameBoard2dArray[rowClicked][(columnClicked +1)] === "not-clicked" || gameBoard2dArray[rowClicked][columnClicked+1] === playerWithCurrentTurn){
             console.log('not valid');
         }
         else {
+            // gameBoard2dArray[$(this).attr("row")][$(this).attr("column")] = $(this).attr("value");
+            //push current coordinates into array and the coordinates of the square above
             searchExtender = 2;
             for (currentPosition = columnClicked + 1; currentPosition <= 7; currentPosition++) {
                 if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === "not-clicked") {
@@ -112,6 +111,10 @@ function checkForValidEntry(){
             console.log('not valid');
         }
         else{
+            // coinFlipArray.push($(this));
+            // console.log(this);
+            // gameBoard2dArray[$(this).attr("row")][$(this).attr("column")] = $(this).attr("value");
+            //push current coordinates into array and the coordinates of the square above
             searchExtender= 2;
             for(currentPosition = columnClicked -1; currentPosition >= 0; currentPosition--) {
                 if (gameBoard2dArray[rowClicked][columnClicked - searchExtender] === "not-clicked") {
@@ -131,11 +134,12 @@ function checkForValidEntry(){
     function checkVertical(){
         var currentPosition;
         var searchExtender;
-
         if ( gameBoard2dArray[rowClicked+1][(columnClicked)] === "not-clicked" || gameBoard2dArray[rowClicked+1][columnClicked] === playerWithCurrentTurn){
             console.log('not valid');
         }
         else {
+            // gameBoard2dArray[$(this).attr("row")][$(this).attr("column")] = $(this).attr("value");
+            //push current coordinates into array and the coordinates of the square above
             searchExtender = 2;
             for (currentPosition = rowClicked + 1; currentPosition <= 7; currentPosition++) {
                 if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === "not-clicked") {
@@ -154,6 +158,8 @@ function checkForValidEntry(){
             console.log('not valid');
         }
         else{
+            // gameBoard2dArray[$(this).attr("row")][$(this).attr("column")] = $(this).attr("value");
+            //push current coordinates into array and the coordinates of the square above
             searchExtender= 2;
             for(currentPosition = columnClicked -1; currentPosition >= 0; currentPosition--){
                 if(gameBoard2dArray[rowClicked-searchExtender][columnClicked] === "not-clicked"){
@@ -273,21 +279,7 @@ function middleSquares() {
     //could add randomization later to order of starting chips
 }
 
-// function testingClassToggle(){
-//     var pieceClassArray=["white","black"];
-//     testingArray.push($('[row=1][column=3]').addClass(pieceClassArray[0]).attr('value','white'));
-//     testingArray.push($('[row=1][column=4]').addClass(pieceClassArray[1]).attr('value','black'));
-//     testingArray.push($('[row=1][column=5]').addClass(pieceClassArray[0]).attr('value','white'));
-//     testingArray.push($('[row=1][column=6]').addClass(pieceClassArray[1]).attr('value','black'));
-// }
 
-function determineWhichClassOfCoinDivsWillAdopt(){
-
-}
-
-// function middleSquares() {
-//     $("div").attr("row","3");
-// }
 
 
 function resetGame() {
@@ -297,6 +289,7 @@ function resetGame() {
 
 function changeArray() {
     //change Array when dom changes
+
     gameBoard2dArray[$(this).attr("row")][$(this).attr("column")] = $(this).attr("value");
     console.log(this);
 }
