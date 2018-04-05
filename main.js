@@ -58,14 +58,20 @@ function createPieces() {
 
 function flipCoins(array) {
     var coinsToBeFlippedIndex = 0;
+    var currentTurnCoinIcon = playerWithCurrentTurn;
     while (coinsToBeFlippedIndex < array.length) {
-        array[coinsToBeFlippedIndex].toggleClass(playerWithCurrentTurn);
+        array[coinsToBeFlippedIndex].toggleClass(playerWithCurrentTurn).attr('value', playerWithCurrentTurn);
+        var columnIndex=array[coinsToBeFlippedIndex].attr('column');
+        var rowIndex = array[coinsToBeFlippedIndex].attr('row');
+        gameBoard2dArray[rowIndex][columnIndex]=playerWithCurrentTurn;
         coinsToBeFlippedIndex++;
-        if (playerWithCurrentTurn === "black") {
-            playerWithCurrentTurn = "white";
-        } else {
-            playerWithCurrentTurn = "black";
-        }
+    }
+    if (playerWithCurrentTurn === "black") {
+        playerWithCurrentTurn = "white";
+        $('.turn-indicator img').attr('src','images/kitty-coin.gif');
+    } else {
+        playerWithCurrentTurn = "black";
+        $('.turn-indicator img').attr('src','images/choco-coin.gif');
     }
 }
 
@@ -101,6 +107,8 @@ function checkForValidEntry(){
                 }
                 if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === "black") {
                     console.log('this is a valid spot');
+                    coinFlipArray.push(holdTheOb);
+
                     return;
                 }
                 else {
@@ -116,6 +124,7 @@ function checkForValidEntry(){
         else{
             coinFlipArray.push(holdTheOb);
             coinFlipArray.push($( "[row="+rowClicked+"][column="+(columnClicked-1)+"]" )[0]);
+
             searchExtender= 2;
             for(currentPosition = columnClicked -1; currentPosition >= 0; currentPosition--) {
                 if (gameBoard2dArray[rowClicked][columnClicked - searchExtender] === "not-clicked") {
@@ -123,6 +132,7 @@ function checkForValidEntry(){
                 }
                 if (gameBoard2dArray[rowClicked][columnClicked - searchExtender] === "black") {
                     console.log('this is a valid spot');
+                    coinFlipArray.push(holdTheOb);
                     return;
                 }
                 else {
@@ -151,6 +161,7 @@ function checkForValidEntry(){
                 }
                 if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === "black") {
                     console.log('this is a valid spot');
+                    coinFlipArray.push(holdTheOb);
                     return;
                 }
                 else {
@@ -173,6 +184,7 @@ function checkForValidEntry(){
                 }
                 if(gameBoard2dArray[rowClicked-searchExtender][columnClicked] === "black"){
                     console.log('this is a valid spot');
+                    coinFlipArray.push(holdTheOb);
                     return;
                 }
                 else{
@@ -202,6 +214,7 @@ function checkForValidEntry(){
                 }
                 if(gameBoard2dArray[rowClicked+searchExtender][columnClicked+searchExtender] === "black"){
                     console.log('this is a valid spot');
+                    coinFlipArray.push(holdTheOb);
                     return;
                 }
                 else{
@@ -215,8 +228,10 @@ function checkForValidEntry(){
             console.log('not valid');
         }
         else{
+
             coinFlipArray.push(holdTheOb);
             coinFlipArray.push($( "[row="+(rowClicked-1)+"][column="+(columnClicked+1)+"]" )[0]);
+
             searchExtender= 2;
             for(currentPosition = columnClicked +1, currentPosition2 = rowClicked-1; currentPosition <= 7 && currentPosition2 >=0; currentPosition++, currentPosition2--){
                 if(gameBoard2dArray[rowClicked-searchExtender][columnClicked+searchExtender] === "not-clicked"){
@@ -224,6 +239,7 @@ function checkForValidEntry(){
                 }
                 if(gameBoard2dArray[rowClicked-searchExtender][columnClicked+searchExtender] === "black"){
                     console.log('this is a valid spot');
+                    coinFlipArray.push(holdTheOb);
                     return;
                 }
                 else{
@@ -247,6 +263,7 @@ function checkForValidEntry(){
                 }
                 if(gameBoard2dArray[rowClicked-searchExtender][columnClicked-searchExtender] === "black"){
                     console.log('this is a valid spot');
+                    coinFlipArray.push(holdTheOb);
                     return;
                 }
                 else{
@@ -269,6 +286,7 @@ function checkForValidEntry(){
                 }
                 if(gameBoard2dArray[rowClicked+searchExtender][columnClicked-searchExtender] === "black"){
                     console.log('this is a valid spot');
+                    coinFlipArray.push(holdTheOb);
                     return;
                 }
                 else{
