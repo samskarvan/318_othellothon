@@ -97,9 +97,9 @@ header::after {
     padding: 15px;
 }
 
-button{
-    height: 10%;
-    width: 60%;
+button, .reset{
+    height: 10vh;
+    width: 10vw;
     background-color: #F697C3;
     border: none;
     border-radius: 15px;
