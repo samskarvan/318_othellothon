@@ -58,20 +58,27 @@ function createPieces() {
 
 function flipCoins(array) {
     var coinsToBeFlippedIndex = 0;
-    while (coinsToBeFlippedIndex < array.length) {
-        array[coinsToBeFlippedIndex].toggleClass(playerWithCurrentTurn).attr('value', playerWithCurrentTurn);
-        var columnIndex=array[coinsToBeFlippedIndex].attr('column');
-        var rowIndex = array[coinsToBeFlippedIndex].attr('row');
-        gameBoard2dArray[rowIndex][columnIndex]=playerWithCurrentTurn;
-        coinsToBeFlippedIndex++;
-    }
-    if (playerWithCurrentTurn === "black") {
-        playerWithCurrentTurn = "white";
-        $('.turn-indicator img').attr('src','images/kitty-coin.gif');
-    } else {
-        playerWithCurrentTurn = "black";
-        $('.turn-indicator img').attr('src','images/choco-coin.gif');
-    }
+        while (coinsToBeFlippedIndex < array.length) {
+            if (playerWithCurrentTurn === "black") {
+                $(array[coinsToBeFlippedIndex]).addClass("black").removeClass("white").attr('value', playerWithCurrentTurn);
+            } else {
+                $(array[coinsToBeFlippedIndex]).addClass("white").removeClass("black").attr('value', playerWithCurrentTurn);
+            }
+
+            var columnIndex = $(array[coinsToBeFlippedIndex]).attr('column');
+            var rowIndex = $(array[coinsToBeFlippedIndex]).attr('row');
+            gameBoard2dArray[rowIndex][columnIndex] = playerWithCurrentTurn;
+            coinsToBeFlippedIndex++;
+        }
+        if (coinFlipArray[0] !== undefined) {
+            if (playerWithCurrentTurn === "black") {
+                playerWithCurrentTurn = "white";
+                $('.turn-indicator img').attr('src', 'assets/images/kitty-coin.gif');
+            } else {
+                playerWithCurrentTurn = "black";
+                $('.turn-indicator img').attr('src', 'assets/images/choco-coin.gif');
+            }
+        }
 }
 
 
@@ -85,6 +92,8 @@ function checkForValidEntry(){
         checkHorizontal(rowClicked,columnClicked);
         checkVertical(rowClicked,columnClicked);
         checkDiagonal(rowClicked,columnClicked);
+        flipCoins(coinFlipArray);
+        coinFlipArray = [];
     }else{
         return;
     }
@@ -93,6 +102,18 @@ function checkForValidEntry(){
         var searchExtender;
 
             // Right Horizontal Check
+        if((rowClicked - 1) < 0) {
+            rowClicked = 1;
+        }
+        if ((columnClicked - 1) < 0) {
+            columnClicked = 1;
+        }
+        if((rowClicked + 1) > 7) {
+            rowClicked = 6;
+        }
+        if((columnClicked + 1) > 7) {
+            columnClicked = 6;
+        }
         if ( gameBoard2dArray[rowClicked][(columnClicked +1)] === "not-clicked" || gameBoard2dArray[rowClicked][columnClicked+1] === playerWithCurrentTurn){
             console.log('not valid');
         }
@@ -102,21 +123,33 @@ function checkForValidEntry(){
             searchExtender = 2;
             for (currentPosition = columnClicked + 1; currentPosition <= 7; currentPosition++) {
                 if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === "not-clicked") {
+                    coinFlipArray.splice(coinFlipArray.length-searchExtender, searchExtender);
                     return;
                 }
-                if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === "black") {
+                if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === playerWithCurrentTurn) {
                     console.log('this is a valid spot');
-                    coinFlipArray.push(holdTheOb);
 
                     return;
                 }
                 else {
-                    coinFlipArray.push($( "[row="+rowClicked+"][column="+columnClicked+searchExtender+"]" )[0]);
+                    coinFlipArray.push($( "[row="+rowClicked+"][column="+(columnClicked+searchExtender)+"]" )[0]);
                     searchExtender++;
                 }
             }
         }
             // Left Horizontal Check
+        if((rowClicked - 1) < 0) {
+            rowClicked = 1;
+        }
+        if ((columnClicked - 1) < 0) {
+            columnClicked = 1;
+        }
+        if((rowClicked + 1) > 7) {
+            rowClicked = 6;
+        }
+        if((columnClicked + 1) > 7) {
+            columnClicked = 6;
+        }
         if ( gameBoard2dArray[rowClicked][(columnClicked -1)] === "not-clicked" || gameBoard2dArray[rowClicked][columnClicked-1] === playerWithCurrentTurn){
             console.log('not valid');
         }
@@ -127,15 +160,15 @@ function checkForValidEntry(){
             searchExtender= 2;
             for(currentPosition = columnClicked -1; currentPosition >= 0; currentPosition--) {
                 if (gameBoard2dArray[rowClicked][columnClicked - searchExtender] === "not-clicked") {
+                    coinFlipArray.splice(coinFlipArray.length-searchExtender, searchExtender);
                     return;
                 }
-                if (gameBoard2dArray[rowClicked][columnClicked - searchExtender] === "black") {
+                if (gameBoard2dArray[rowClicked][columnClicked - searchExtender] === playerWithCurrentTurn) {
                     console.log('this is a valid spot');
-                    coinFlipArray.push(holdTheOb);
                     return;
                 }
                 else {
-                    coinFlipArray.push($( "[row="+rowClicked+"][column="+columnClicked-searchExtender+"]" )[0]);
+                        coinFlipArray.push($( "[row="+rowClicked+"][column="+(columnClicked-searchExtender)+"]" )[0]);
                     searchExtender++;
                 }
             }
@@ -147,6 +180,18 @@ function checkForValidEntry(){
         var searchExtender;
 
             // Bottom Vertical Check
+        if((rowClicked - 1) < 0) {
+            rowClicked = 1;
+        }
+        if ((columnClicked - 1) < 0) {
+            columnClicked = 1;
+        }
+        if((rowClicked + 1) > 7) {
+            rowClicked = 6;
+        }
+        if((columnClicked + 1) > 7) {
+            columnClicked = 6;
+        }
         if ( gameBoard2dArray[rowClicked+1][(columnClicked)] === "not-clicked" || gameBoard2dArray[rowClicked+1][columnClicked] === playerWithCurrentTurn){
             console.log('not valid');
         }
@@ -156,20 +201,32 @@ function checkForValidEntry(){
             searchExtender = 2;
             for (currentPosition = rowClicked + 1; currentPosition <= 7; currentPosition++) {
                 if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === "not-clicked") {
+                    coinFlipArray.splice(coinFlipArray.length-searchExtender, searchExtender);
                     return;
                 }
-                if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === "black") {
+                if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === playerWithCurrentTurn) {
                     console.log('this is a valid spot');
-                    coinFlipArray.push(holdTheOb);
                     return;
                 }
                 else {
-                    coinFlipArray.push($( "[row="+rowClicked+searchExtender+"][column="+columnClicked+"]" )[0]);
+                    coinFlipArray.push($( "[row="+(rowClicked+searchExtender)+"][column="+columnClicked+"]" )[0]);
                     searchExtender++;
                 }
             }
         }
             // Top Vertical Check
+        if((rowClicked - 1) < 0) {
+            rowClicked = 1;
+        }
+        if ((columnClicked - 1) < 0) {
+            columnClicked = 1;
+        }
+        if((rowClicked + 1) > 7) {
+            rowClicked = 6;
+        }
+        if((columnClicked + 1) > 7) {
+            columnClicked = 6;
+        }
         if ( gameBoard2dArray[rowClicked-1][(columnClicked)] === "not-clicked" || gameBoard2dArray[rowClicked-1][columnClicked] === playerWithCurrentTurn){
             console.log('not valid');
         }
@@ -179,15 +236,15 @@ function checkForValidEntry(){
             searchExtender= 2;
             for(currentPosition = columnClicked -1; currentPosition >= 0; currentPosition--){
                 if(gameBoard2dArray[rowClicked-searchExtender][columnClicked] === "not-clicked"){
+                    coinFlipArray.splice(coinFlipArray.length-searchExtender, searchExtender);
                     return;
                 }
-                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked] === "black"){
+                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked] === playerWithCurrentTurn){
                     console.log('this is a valid spot');
-                    coinFlipArray.push(holdTheOb);
                     return;
                 }
                 else{
-                    coinFlipArray.push($( "[row="+rowClicked-searchExtender+"][column="+columnClicked+"]" )[0]);
+                    coinFlipArray.push($( "[row="+(rowClicked-searchExtender)+"][column="+columnClicked+"]" )[0]);
                     searchExtender++;
                 }
             }
@@ -199,6 +256,18 @@ function checkForValidEntry(){
         var searchExtender;
 
         // bottom right diagonal check
+        if((rowClicked - 1) < 0) {
+            rowClicked = 1;
+        }
+        if ((columnClicked - 1) < 0) {
+            columnClicked = 1;
+        }
+        if((rowClicked + 1) > 7) {
+            rowClicked = 6;
+        }
+        if((columnClicked + 1) > 7) {
+            columnClicked = 6;
+        }
         if ( gameBoard2dArray[rowClicked+1][(columnClicked+1)] === "not-clicked" || gameBoard2dArray[rowClicked+1][columnClicked+1] === playerWithCurrentTurn){
             console.log('not valid');
         }
@@ -209,20 +278,32 @@ function checkForValidEntry(){
             searchExtender= 2;
             for(currentPosition = greaterNumber +1; currentPosition <= 7; currentPosition++){
                 if(gameBoard2dArray[rowClicked+searchExtender][columnClicked+searchExtender] === "not-clicked"){
+                    coinFlipArray.splice(coinFlipArray.length-searchExtender, searchExtender);
                     return;
                 }
-                if(gameBoard2dArray[rowClicked+searchExtender][columnClicked+searchExtender] === "black"){
+                if(gameBoard2dArray[rowClicked+searchExtender][columnClicked+searchExtender] === playerWithCurrentTurn){
                     console.log('this is a valid spot');
-                    coinFlipArray.push(holdTheOb);
                     return;
                 }
                 else{
-                    coinFlipArray.push($( "[row="+rowClicked+searchExtender+"][column="+columnClicked+searchExtender+"]" )[0]);
+                    coinFlipArray.push($( "[row="+(rowClicked+searchExtender)+"][column="+(columnClicked+searchExtender)+"]" )[0]);
                     searchExtender++;
                 }
             }
         }
         // top right diagonal check
+        if((rowClicked - 1) < 0) {
+            rowClicked = 1;
+        }
+        if ((columnClicked - 1) < 0) {
+            columnClicked = 1;
+        }
+        if((rowClicked + 1) > 7) {
+            rowClicked = 6;
+        }
+        if((columnClicked + 1) > 7) {
+            columnClicked = 6;
+        }
         if ( gameBoard2dArray[rowClicked-1][(columnClicked+1)] === "not-clicked" || gameBoard2dArray[rowClicked-1][columnClicked+1] === playerWithCurrentTurn){
             console.log('not valid');
         }
@@ -234,20 +315,32 @@ function checkForValidEntry(){
             searchExtender= 2;
             for(currentPosition = columnClicked +1, currentPosition2 = rowClicked-1; currentPosition <= 7 && currentPosition2 >=0; currentPosition++, currentPosition2--){
                 if(gameBoard2dArray[rowClicked-searchExtender][columnClicked+searchExtender] === "not-clicked"){
+                    coinFlipArray.splice(coinFlipArray.length-searchExtender, searchExtender);
                     return;
                 }
-                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked+searchExtender] === "black"){
+                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked+searchExtender] === playerWithCurrentTurn){
                     console.log('this is a valid spot');
-                    coinFlipArray.push(holdTheOb);
                     return;
                 }
                 else{
-                    coinFlipArray.push($( "[row="+rowClicked-searchExtender+"][column="+columnClicked+searchExtender+"]" )[0]);
+                    coinFlipArray.push($( "[row="+(rowClicked-searchExtender)+"][column="+(columnClicked+searchExtender)+"]" )[0]);
                     searchExtender++;
                 }
             }
         }
         // top left diagonal check
+        if((rowClicked - 1) < 0) {
+            rowClicked = 1;
+        }
+        if ((columnClicked - 1) < 0) {
+            columnClicked = 1;
+        }
+        if((rowClicked + 1) > 7) {
+            rowClicked = 6;
+        }
+        if((columnClicked + 1) > 7) {
+            columnClicked = 6;
+        }
         if ( gameBoard2dArray[rowClicked-1][(columnClicked-1)] === "not-clicked" || gameBoard2dArray[rowClicked-1][columnClicked-1] === playerWithCurrentTurn){
             console.log('not valid');
         }
@@ -258,20 +351,32 @@ function checkForValidEntry(){
             searchExtender= 2;
             for(currentPosition = lesserNumber -1; currentPosition >= 0; currentPosition--){
                 if(gameBoard2dArray[rowClicked-searchExtender][columnClicked-searchExtender] === "not-clicked"){
+                    coinFlipArray.splice(coinFlipArray.length-searchExtender, searchExtender);
                     return;
                 }
-                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked-searchExtender] === "black"){
+                if(gameBoard2dArray[rowClicked-searchExtender][columnClicked-searchExtender] === playerWithCurrentTurn){
                     console.log('this is a valid spot');
-                    coinFlipArray.push(holdTheOb);
                     return;
                 }
                 else{
-                    coinFlipArray.push($( "[row="+rowClicked-searchExtender+"][column="+columnClicked-searchExtender+"]" )[0]);
+                    coinFlipArray.push($( "[row="+(rowClicked-searchExtender)+"][column="+(columnClicked-searchExtender)+"]" )[0]);
                     searchExtender++;
                 }
             }
         }
         // bottom left diagonal check
+        if((rowClicked - 1) < 0) {
+            rowClicked = 1;
+        }
+        if ((columnClicked - 1) < 0) {
+            columnClicked = 1;
+        }
+        if((rowClicked + 1) > 7) {
+            rowClicked = 6;
+        }
+        if((columnClicked + 1) > 7) {
+            columnClicked = 6;
+        }
         if ( gameBoard2dArray[rowClicked+1][(columnClicked-1)] === "not-clicked" || gameBoard2dArray[rowClicked+1][columnClicked-1] === playerWithCurrentTurn){
             console.log('not valid');
         }
@@ -281,20 +386,36 @@ function checkForValidEntry(){
             searchExtender= 2;
             for(currentPosition = columnClicked -1, currentPosition2 = rowClicked+1; currentPosition >= 0 && currentPosition2 <= 7; currentPosition--, rowClicked++){
                 if(gameBoard2dArray[rowClicked+searchExtender][columnClicked-searchExtender] === "not-clicked"){
+                    coinFlipArray.splice(coinFlipArray.length-searchExtender, searchExtender);
                     return;
                 }
-                if(gameBoard2dArray[rowClicked+searchExtender][columnClicked-searchExtender] === "black"){
+                if(gameBoard2dArray[rowClicked+searchExtender][columnClicked-searchExtender] === playerWithCurrentTurn){
                     console.log('this is a valid spot');
-                    coinFlipArray.push(holdTheOb);
                     return;
                 }
                 else{
-                    coinFlipArray.push($( "[row="+rowClicked+searchExtender+"][column="+columnClicked-searchExtender+"]" )[0]);
+                    coinFlipArray.push($( "[row="+(rowClicked+searchExtender)+"][column="+(columnClicked-searchExtender)+"]" )[0]);
                     searchExtender++;
                 }
             }
         }
     }
+}
+
+function screenEdgeCheck(rowClicked,columnClicked){
+    if((rowClicked - 1) < 0) {
+        rowClicked = 1;
+    }
+    if ((columnClicked - 1) < 0) {
+        columnClicked = 1;
+    }
+    if((rowClicked + 1) > 7) {
+        rowClicked = 6;
+    }
+    if((columnClicked + 1) > 7) {
+        columnClicked = 6;
+    }
+
 }
 
 
@@ -314,11 +435,11 @@ function middleSquares() {
 
 
 
+//
+// function resetGame()
+//     //reset all variables
 
-function resetGame() {
-    //reset all variables
-
-}
+// }
 
 function changeArray() {
     //change Array when dom changes
