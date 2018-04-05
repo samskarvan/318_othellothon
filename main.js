@@ -5,6 +5,7 @@ function initializeApp(){
 console.log("Hello, Kitty!");
 createGameBoard(8,8);
 middleSquares();
+$("button").click(resetGame);
 
 }
 
@@ -437,20 +438,40 @@ function middleSquares() {
 
 
 
-//
-// function resetGame()
-//     //reset all variables
-
-// }
-
-function changeArray() {
-    //change Array when dom changes
-
-    gameBoard2dArray[$(this).attr("row")][$(this).attr("column")] = $(this).attr("value");
-    console.log(this);
+//resetGame is not fully functional yet
+function resetGame() {
+    //reset all variables
+    playerWithCurrentTurn = "black";
+    gameBoard2dArray = [];
+    coinFlipArray = [];
 }
 
-//need function to tell which player clicked last
+// //playing around
+// function work() {
+//     var objClicked = this;
+//     var rowClicked = parseInt($(this).attr('row'));
+//     var columnClicked = parseInt($(this).attr('column'));
+//     var selectSquare = $( "[row="+(rowClicked+searchExtender)+"][column="+(columnClicked-searchExtender)+"]" )[0];
+//     coinFlipArray.push(objClicked);
+//     coinFlipArray.push($( "[row="+(rowClicked-1)+"][column="+(columnClicked-1)+"]" )[0]);
+//     r-1,c-1
+//     r-1, c
+//     r01, c+1
+//
+//     r, c-1
+//     r, c+1
+//
+//     r+1, c-1
+//     r+1, c
+//     r+1, c+1
+//
+// }
+
+
+
+
+
+
 
 
 
