@@ -58,7 +58,6 @@ function createPieces() {
 
 function flipCoins(array) {
     var coinsToBeFlippedIndex = 0;
-    var currentTurnCoinIcon = playerWithCurrentTurn;
     while (coinsToBeFlippedIndex < array.length) {
         array[coinsToBeFlippedIndex].toggleClass(playerWithCurrentTurn).attr('value', playerWithCurrentTurn);
         var columnIndex=array[coinsToBeFlippedIndex].attr('column');
@@ -112,7 +111,7 @@ function checkForValidEntry(){
                     return;
                 }
                 else {
-                    oinFlipArray.push($( "[row="+rowClicked+"][column="+columnClicked+searchExtender+"]" )[0]);
+                    coinFlipArray.push($( "[row="+rowClicked+"][column="+columnClicked+searchExtender+"]" )[0]);
                     searchExtender++;
                 }
             }
