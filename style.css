@@ -127,11 +127,15 @@ button{
     background-image: url("assets/images/kitty-coin.gif");
     background-position: center;
     background-repeat: no-repeat;
+    z-index: -1;
+    transform: rotateY(180deg);
 }
 .black{
     background-image: url("assets/images/choco-coin.gif");
     background-position: center;
     background-repeat: no-repeat;
+    z-index: 0;
+    transform: rotateY(180deg);
 }
 .card.back {
     transform: rotateY(180deg);
