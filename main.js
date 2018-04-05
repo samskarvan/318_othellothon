@@ -16,7 +16,7 @@ function createGameBoard(columnAmount, rowAmount) {
     var columnCountBuild = 1;
     for(rowIterate = 0; rowIterate < columnAmount; rowIterate++) {
         var newFirstSquareOfRow = ($("<div>", {
-            class: "square",
+            class: "square front white",
             value: "blank",
             row: rowCountFirst,
             column: 0,
@@ -53,10 +53,41 @@ function createPieces() {
 }
 
 //based on whose turn it is, white kitty and black kitty
+var playerWithCurrentTurn="black";
+var testingArray=gameBoard2dArray;
+function flipCoins(gameBoard2Array){
+    //since we don't have ai functionality, user will play for both teams, so default turn will be set to black
+    //turn all values in the array to the value of the current turn - call flip function
+    //change current player to white after flipping has occured (at end of function)
+    var coinsToBeFlippedIndex=0;
+    while(coinsToBeFlippedIndex<array.length){
+        // array[coinsToBeFlippedIndex] flip animation--should divs start with all coin classes at different z indexs and then toggle higher/lower index classes on flip?
+        array[coinsToBeFlippedIndex].toggleClass(playerWithCurrentTurn);//class of coin whose turn it is-white or black//);
+        coinsToBeFlippedIndex++;
+        if(playerWithCurrentTurn==="black"){
+            playerWithCurrentTurn="white";
+        }else{
+            playerWithCurrentTurn="black";
+        }
+    }
 
-function middleSquares() {
-    $("div").attr("row","3");
 }
+
+// function testingClassToggle(){
+//     var pieceClassArray=["white","black"];
+//     testingArray.push($('[row=1][column=3]').addClass(pieceClassArray[0]).attr('value','white'));
+//     testingArray.push($('[row=1][column=4]').addClass(pieceClassArray[1]).attr('value','black'));
+//     testingArray.push($('[row=1][column=5]').addClass(pieceClassArray[0]).attr('value','white'));
+//     testingArray.push($('[row=1][column=6]').addClass(pieceClassArray[1]).attr('value','black'));
+// }
+
+function determineWhichClassOfCoinDivsWillAdopt(){
+
+}
+
+// function middleSquares() {
+//     $("div").attr("row","3");
+// }
 
 
 
