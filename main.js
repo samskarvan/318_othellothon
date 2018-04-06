@@ -141,7 +141,9 @@ function checkForValidEntry(){
 
                 searchExtender = 2;
                 for (currentPosition = columnClicked - 1; currentPosition >= 0; currentPosition--) {
+
                     if (gameBoard2dArray[rowClicked][ columnClicked - searchExtender] === undefined || gameBoard2dArray[rowClicked][columnClicked - searchExtender] === "not-clicked") {
+
                         coinFlipArray.splice(coinFlipArray.length - searchExtender, searchExtender);
                         return;
                     }
@@ -172,7 +174,9 @@ function checkForValidEntry(){
                 coinFlipArray.push($("[row=" + (rowClicked + 1) + "][column=" + columnClicked + "]")[0]);
                 searchExtender = 2;
                 for (currentPosition = rowClicked + 1; currentPosition <= 7; currentPosition++) {
+
                     if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === undefined || gameBoard2dArray[rowClicked + searchExtender][columnClicked] === "not-clicked") {
+
                         coinFlipArray.splice(coinFlipArray.length - searchExtender, searchExtender);
                         return;
                     }
@@ -187,7 +191,9 @@ function checkForValidEntry(){
                 }
             }
         }
+
         // Top Vertical Check
+
         if((rowClicked - 1) >= 0) {
             if (gameBoard2dArray[rowClicked - 1][(columnClicked)] === "not-clicked" || gameBoard2dArray[rowClicked - 1][columnClicked] === playerWithCurrentTurn) {
                 console.log('not valid');
@@ -197,7 +203,9 @@ function checkForValidEntry(){
                 coinFlipArray.push($("[row=" + (rowClicked - 1) + "][column=" + columnClicked + "]")[0]);
                 searchExtender = 2;
                 for (currentPosition = columnClicked - 1; currentPosition >= 0; currentPosition--) {
+
                     if (gameBoard2dArray[rowClicked - searchExtender][columnClicked] === undefined || gameBoard2dArray[rowClicked - searchExtender][columnClicked] === "not-clicked") {
+
                         coinFlipArray.splice(coinFlipArray.length - searchExtender, searchExtender);
                         return;
                     }
@@ -229,7 +237,7 @@ function checkForValidEntry(){
                 var greaterNumber = Math.max(rowClicked, columnClicked);
                 searchExtender = 2;
                 for (currentPosition = greaterNumber + 1; currentPosition <= 7; currentPosition++) {
-                    //this is where you added some shit alia
+              
                     if (gameBoard2dArray[rowClicked + searchExtender] &&
                         gameBoard2dArray[rowClicked + searchExtender][columnClicked + searchExtender] &&
                         (   gameBoard2dArray[rowClicked + searchExtender][columnClicked + searchExtender] === undefined ||
@@ -289,6 +297,7 @@ function checkForValidEntry(){
                 var lesserNumber = Math.min(rowClicked, columnClicked);
                 searchExtender = 2;
                 for (currentPosition = lesserNumber - 1; currentPosition >= 0; currentPosition--) {
+
                     if(gameBoard2dArray[rowClicked - searchExtender] === undefined){
                         continue;
                     }
