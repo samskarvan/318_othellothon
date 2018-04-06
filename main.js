@@ -5,7 +5,7 @@ function initializeApp(){
 console.log("Hello, Kitty!");
 createGameBoard(8,8);
 middleSquares();
-$("button").click(resetGame);
+$("button").click(newGame);
 
 }
 
@@ -79,6 +79,7 @@ function flipCoins(array) {
                 playerWithCurrentTurn = "black";
                 $('.turn-indicator img').attr('src', 'assets/images/choco-coin.gif');
             }
+            changeGameScore();
         }
 }
 
@@ -112,7 +113,8 @@ function checkForValidEntry(){
                 coinFlipArray.push($("[row=" + rowClicked + "][column=" + (columnClicked + 1) + "]")[0]);
                 searchExtender = 2;
                 for (currentPosition = columnClicked + 1; currentPosition <= 7; currentPosition++) {
-                    if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === "not-clicked") {
+                    if (gameBoard2dArray[rowClicked][columnClicked + searchExtender] === undefined ||
+                        gameBoard2dArray[rowClicked][columnClicked + searchExtender] === "not-clicked") {
                         coinFlipArray.splice(coinFlipArray.length - searchExtender, searchExtender);
                         return;
                     }
@@ -139,7 +141,7 @@ function checkForValidEntry(){
 
                 searchExtender = 2;
                 for (currentPosition = columnClicked - 1; currentPosition >= 0; currentPosition--) {
-                    if (gameBoard2dArray[rowClicked][columnClicked - searchExtender] === "not-clicked") {
+                    if (gameBoard2dArray[rowClicked][ columnClicked - searchExtender] === undefined || gameBoard2dArray[rowClicked][columnClicked - searchExtender] === "not-clicked") {
                         coinFlipArray.splice(coinFlipArray.length - searchExtender, searchExtender);
                         return;
                     }
@@ -170,7 +172,7 @@ function checkForValidEntry(){
                 coinFlipArray.push($("[row=" + (rowClicked + 1) + "][column=" + columnClicked + "]")[0]);
                 searchExtender = 2;
                 for (currentPosition = rowClicked + 1; currentPosition <= 7; currentPosition++) {
-                    if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === "not-clicked") {
+                    if (gameBoard2dArray[rowClicked + searchExtender][columnClicked] === undefined || gameBoard2dArray[rowClicked + searchExtender][columnClicked] === "not-clicked") {
                         coinFlipArray.splice(coinFlipArray.length - searchExtender, searchExtender);
                         return;
                     }
@@ -195,7 +197,7 @@ function checkForValidEntry(){
                 coinFlipArray.push($("[row=" + (rowClicked - 1) + "][column=" + columnClicked + "]")[0]);
                 searchExtender = 2;
                 for (currentPosition = columnClicked - 1; currentPosition >= 0; currentPosition--) {
-                    if (gameBoard2dArray[rowClicked - searchExtender][columnClicked] === "not-clicked") {
+                    if (gameBoard2dArray[rowClicked - searchExtender][columnClicked] === undefined || gameBoard2dArray[rowClicked - searchExtender][columnClicked] === "not-clicked") {
                         coinFlipArray.splice(coinFlipArray.length - searchExtender, searchExtender);
                         return;
                     }
@@ -228,7 +230,11 @@ function checkForValidEntry(){
                 searchExtender = 2;
                 for (currentPosition = greaterNumber + 1; currentPosition <= 7; currentPosition++) {
                     //this is where you added some shit alia
-                    if (gameBoard2dArray[rowClicked + searchExtender] && gameBoard2dArray[rowClicked + searchExtender][columnClicked + searchExtender] &&  gameBoard2dArray[rowClicked + searchExtender][columnClicked + searchExtender] === "not-clicked" ) {
+                    if (gameBoard2dArray[rowClicked + searchExtender] &&
+                        gameBoard2dArray[rowClicked + searchExtender][columnClicked + searchExtender] &&
+                        (   gameBoard2dArray[rowClicked + searchExtender][columnClicked + searchExtender] === undefined ||
+                            gameBoard2dArray[rowClicked + searchExtender][columnClicked + searchExtender] === "not-clicked" )
+                        ){
                         coinFlipArray.splice(coinFlipArray.length - searchExtender, searchExtender);
                         return;
                     }
@@ -244,8 +250,10 @@ function checkForValidEntry(){
             }
         }
         // top right diagonal check
-        if(columnClicked - 1 >= 0 && rowClicked+1 <=7) {
-            if (gameBoard2dArray[rowClicked - 1][(columnClicked + 1)] === "not-clicked" || gameBoard2dArray[rowClicked - 1][columnClicked + 1] === playerWithCurrentTurn) {
+        if( rowClicked - 1 >= 0 && columnClicked+1 <=7) {
+            if (gameBoard2dArray[rowClicked - 1] === undefined ||
+                gameBoard2dArray[rowClicked - 1][(columnClicked + 1)] === "not-clicked" ||
+                gameBoard2dArray[rowClicked - 1][columnClicked + 1] === playerWithCurrentTurn) {
                 console.log('not valid');
             }
             else {
@@ -272,7 +280,7 @@ function checkForValidEntry(){
         }
         // top left diagonal check
         if(columnClicked - 1 >= 0 && rowClicked - 1  >= 0 ) {
-            if (gameBoard2dArray[rowClicked - 1][(columnClicked - 1)] === "not-clicked" || gameBoard2dArray[rowClicked - 1][columnClicked - 1] === playerWithCurrentTurn) {
+            if (gameBoard2dArray[rowClicked - 1] === undefined || gameBoard2dArray[rowClicked - 1][(columnClicked - 1)] === "not-clicked" || gameBoard2dArray[rowClicked - 1][columnClicked - 1] === playerWithCurrentTurn) {
                 console.log('not valid');
             }
             else {
@@ -281,6 +289,9 @@ function checkForValidEntry(){
                 var lesserNumber = Math.min(rowClicked, columnClicked);
                 searchExtender = 2;
                 for (currentPosition = lesserNumber - 1; currentPosition >= 0; currentPosition--) {
+                    if(gameBoard2dArray[rowClicked - searchExtender] === undefined){
+                        continue;
+                    }
                     if (gameBoard2dArray[rowClicked - searchExtender][columnClicked - searchExtender] === "not-clicked") {
                         coinFlipArray.splice(coinFlipArray.length - searchExtender, searchExtender);
                         return;
@@ -298,7 +309,7 @@ function checkForValidEntry(){
         }
         // bottom left diagonal check
         if(columnClicked - 1 >= 0 && rowClicked + 1 <= 7) {
-            if (gameBoard2dArray[rowClicked + 1][(columnClicked - 1)] === "not-clicked" || gameBoard2dArray[rowClicked + 1][columnClicked - 1] === playerWithCurrentTurn) {
+            if (gameBoard2dArray[rowClicked + 1] === undefined || gameBoard2dArray[rowClicked + 1][(columnClicked - 1)] === "not-clicked" || gameBoard2dArray[rowClicked + 1][columnClicked - 1] === playerWithCurrentTurn) {
                 console.log('not valid');
             }
             else {
@@ -356,35 +367,33 @@ function middleSquares() {
 }
 
 
-
-//resetGame is not fully functional yet
-function resetGame() {
-    //reset all variables
+function newGame(){
+    var gamesPlayed = 0;
+    gameBoard2dArray=[];
+    createGameBoard(8,8);
+    gamesPlayed++;
+    $('.games-played .stat-label').text(gamesPlayed);
     playerWithCurrentTurn = "black";
-    gameBoard2dArray = [];
-    coinFlipArray = [];
+    $('.turn-indicator img').attr('src', 'assets/images/choco-coin.gif');
 }
 
-// //playing around
-// function work() {
-//     var objClicked = this;
-//     var rowClicked = parseInt($(this).attr('row'));
-//     var columnClicked = parseInt($(this).attr('column'));
-//     var selectSquare = $( "[row="+(rowClicked+searchExtender)+"][column="+(columnClicked-searchExtender)+"]" )[0];
-//     coinFlipArray.push(objClicked);
-//     coinFlipArray.push($( "[row="+(rowClicked-1)+"][column="+(columnClicked-1)+"]" )[0]);
-//     r-1,c-1
-//     r-1, c
-//     r01, c+1
-//
-//     r, c-1
-//     r, c+1
-//
-//     r+1, c-1
-//     r+1, c
-//     r+1, c+1
-//
-// }
+function changeGameScore(){
+    var chocoCoinArray=$('.black').toArray();
+    var kittyCoinArray=$('.white').toArray();
+    var kittyScore=kittyCoinArray.length;
+    var chocoScore=chocoCoinArray.length;
+    $('.choco-cat-score').text(chocoScore);
+    $('.kitty-score').text(kittyScore);
+    winGame(chocoScore,kittyScore);
+}
+
+function winGame(chocoScore,kittyScore){
+    if(chocoScore+kittyScore==64){
+        //game over modal.show(); on click of the modal reset game button, call newGame function
+    }else{
+        return;
+    }
+}
 
 
 
