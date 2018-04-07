@@ -236,11 +236,12 @@ button, .reset{
     width: 50%;
 }
 
-.choco-cat-score, .kitty-score{
+.choco-cat-score, .kitty-cat-score{
     display: inline-block;
 }
 
 .choco-score img, .kitty-score img{
+    display: inline-block;
     height: 30%;
     width: 30%;
 }
