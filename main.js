@@ -392,7 +392,7 @@ function changeGameScore(){
     var kittyScore=kittyCoinArray.length;
     var chocoScore=chocoCoinArray.length;
     $('.choco-cat-score').text(chocoScore);
-    $('.kitty-score').text(kittyScore);
+    $('.kitty-cat-score').text(kittyScore);
     winGame(chocoScore,kittyScore);
 }
 
