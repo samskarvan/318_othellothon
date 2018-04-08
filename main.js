@@ -5,6 +5,7 @@ function initializeApp(){
 console.log("Hello, Kitty!");
 createGameBoard(8,8);
 middleSquares();
+gameThemeMusic.play();
 $("button").click(newGame);
 
 }
@@ -12,6 +13,17 @@ $("button").click(newGame);
 var playerWithCurrentTurn = "black";
 var gameBoard2dArray = [];
 var coinFlipArray = [];
+
+var coinFlipSound = new Audio();
+coinFlipSound.src = 'assets/images/coinFlipSound.wav';
+coinFlipSound.volume = .5;
+
+var gameThemeMusic = new Audio();
+gameThemeMusic.src = 'assets/images/othelloKittyThemeSong.mp3';
+gameThemeMusic.volume = .2;
+gameThemeMusic.onpause = function() {
+    this.play();
+};
 
 function createGameBoard(columnAmount, rowAmount) {
     var gameBoard = $("#game-area");
@@ -79,6 +91,7 @@ function flipCoins(array) {
                 $('.turn-indicator img').attr('src', 'assets/images/choco-coin.gif');
             }
             changeGameScore();
+            coinFlipSound.play();
         }
 }
 
