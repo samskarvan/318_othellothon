@@ -6,17 +6,8 @@ body{
     background-image: url("assets/images/Hello-Kitty-4.jpg");
     background-size: 100vw 100vh;
     background-repeat: no-repeat;
+    overflow: hidden;
 }
-/*#game-area {*/
-    /*!*perspective: 1000px;*!*/
-    /*!*position: relative;*!*/
-    /*!*width: 70%;*!*/
-    /*!*height: 50vh;*!*/
-    /*!*left: 8%;*!*/
-    /*!*margin-top: 0.5%;*!*/
-    /*!*display: inline-block;*!*/
-    /*background-color: #F697C3;*/
-/*}*/
 
 #game-area {
     display: inline-block;
@@ -92,8 +83,8 @@ header::after {
     bottom: 50%;
 }
 
-.games-played, .attempts, .accuracy {
-    padding: 15px;
+.games-played, .value, .attempts, .accuracy {
+    padding: 1%;
 }
 
 button, .reset{
@@ -257,13 +248,25 @@ button, .reset{
     width: 30%;
 }
 
-/*#stats > div{*/
-    /*height: 2%;*/
-    /*width: 5%;*/
-/*}*/
-
 .border-highlight:hover{
     border: 2px solid #A96779;
     opacity: 0.5;
     background-color: #C1466F;
+}
+
+.mute img {
+    height: 80%;
+    width: 80%;
+}
+
+.mute {
+    border: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: relative;
+    z-index: 1;
+    background-color: rgba(0, 255, 0, 0.4);
+    float: right;
+    margin: 2%;
+    height: 7vh;
+    width: 7vh;
 }

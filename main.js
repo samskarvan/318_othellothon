@@ -6,13 +6,15 @@ console.log("Hello, Kitty!");
 createGameBoard(8,8);
 middleSquares();
 gameThemeMusic.play();
-$("button").click(newGame);
+$(".reset").click(newGame);
+$(".mute").click(muteMusic);
 
 }
 
 var playerWithCurrentTurn = "black";
 var gameBoard2dArray = [];
 var coinFlipArray = [];
+var gamesPlayed = 0;
 
 var coinFlipSound = new Audio();
 coinFlipSound.src = 'assets/images/coinFlipSound.wav';
@@ -24,6 +26,8 @@ gameThemeMusic.volume = .2;
 gameThemeMusic.onpause = function() {
     this.play();
 };
+
+$("html").append(coinFlipSound, gameThemeMusic);
 
 function createGameBoard(columnAmount, rowAmount) {
     var gameBoard = $("#game-area");
@@ -40,7 +44,6 @@ function createGameBoard(columnAmount, rowAmount) {
         }));
         gameBoard2dArray.push([]);
         gameBoard2dArray[rowCountFirst].push(newFirstSquareOfRow[0].attributes.value.nodeValue);
-        console.log(newFirstSquareOfRow[0].attributes.value.nodeValue);
         rowCountFirst++;
         gameBoard.append(newFirstSquareOfRow);
         for(colIterate = 0; colIterate < rowAmount-1; colIterate++) {
@@ -57,16 +60,11 @@ function createGameBoard(columnAmount, rowAmount) {
         }
         rowCountBuild++;
         columnCountBuild = 1;
+        $("span.games-played").text(gamesPlayed);
     }
-    console.log(gameBoard2dArray);
 
 }
 
-function createPieces() {
-    console.log("pieces initiated");
-    console.log(this);
-    $(this).addClass("front", "border-highlight");
-}
 
 
 function flipCoins(array) {
@@ -354,32 +352,39 @@ function checkForValidEntry(){
 
 function middleSquares() {
     pieceClassArray = [ "white", "black"];
-    $( "[row=3][column=3]" ).addClass(pieceClassArray[0]).attr("value","white");
+    $( "[row=3][column=3]" ).addClass(pieceClassArray[0]).addClass("originalSquare").attr("value","white");
     gameBoard2dArray[3][3] = "white";
-    $( "[row=3][column=4]" ).addClass(pieceClassArray[1]).attr("value","black");
+    $( "[row=3][column=4]" ).addClass(pieceClassArray[1]).addClass("originalSquare").attr("value","black");
     gameBoard2dArray[3][4] = "black";
-    $( "[row=4][column=3]" ).addClass(pieceClassArray[1]).attr("value","black");
+    $( "[row=4][column=3]" ).addClass(pieceClassArray[1]).addClass("originalSquare").attr("value","black");
     gameBoard2dArray[4][3] = "black";
-    $( "[row=4][column=4]" ).addClass(pieceClassArray[0]).attr("value","white");
+    $( "[row=4][column=4]" ).addClass(pieceClassArray[0]).addClass("originalSquare").attr("value","white");
     gameBoard2dArray[4][4] = "white";
     //could add randomization later to order of starting chips
 }
 
 function newGame(){
-    var gamesPlayed = 0;
+
+    var blankSquaresArray = $(".square.front:not(.white,.black)");
+    if (blankSquaresArray.length === 0) {
+        gamesPlayed++;
+    }
+
     gameBoard2dArray=[];
+    var gameBoard = $("#game-area");
+    gameBoard.empty();
     createGameBoard(8,8);
-    gamesPlayed++;
-    $('.games-played .stat-label').text(gamesPlayed);
-    playerWithCurrentTurn = "black";
-    $('.turn-indicator img').attr('src', 'assets/images/choco-coin.gif');
+    middleSquares();
+    $("span.games-played").text(gamesPlayed);
+    $('.choco-cat-score').text(0);
+    $('.kitty-cat-score').text(0);
 }
 
 function changeGameScore(){
-    var chocoCoinArray=$('.black').toArray();
-    var kittyCoinArray=$('.white').toArray();
-    var kittyScore=kittyCoinArray.length;
-    var chocoScore=chocoCoinArray.length;
+    var chocoCoinArray = $('.black').toArray();
+    var kittyCoinArray = $('.white').toArray();
+    var kittyScore = kittyCoinArray.length;
+    var chocoScore = chocoCoinArray.length;
     $('.choco-cat-score').text(chocoScore);
     $('.kitty-cat-score').text(kittyScore);
     winGame(chocoScore,kittyScore);
@@ -393,11 +398,18 @@ function winGame(chocoScore,kittyScore){
     }
 }
 
-
-
-
-
-
-
+function muteMusic() {
+    var mute = "https://cdn0.iconfinder.com/data/icons/forgen-audio-video/48/mute-512.png";
+    var play = "https://cdn2.iconfinder.com/data/icons/social-productivity-line-art-2/128/volume-512.png";
+    if (gameThemeMusic.muted === true) {
+        gameThemeMusic.muted = false;
+        coinFlipSound.muted = false;
+        $("button img")[0].src = play;
+    } else {
+        gameThemeMusic.muted = true;
+        coinFlipSound.muted = true;
+        $("button img")[0].src = mute;
+    }
+}
 
 
