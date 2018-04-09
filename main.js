@@ -120,6 +120,7 @@ function checkForValidHover(){
             $(this).css("background-color", "#BFF0FE").css("cursor", "pointer");
             coinFlipArray = [];
         }
+
     }else{
         return;
     }
@@ -129,6 +130,9 @@ function hoverOut(){
     $(this).css("background-color", "#F697C3").css("cursor", "auto");
 }
 
+function isPlayPossible(){
+    for (var i = 7; )
+}
 function checkForValidEntry() {
     var holdTheOb = this;
     if ($(this).attr('value') === "not-clicked") {
