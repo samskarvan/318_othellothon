@@ -7,6 +7,7 @@ body{
     background-size: 100vw 100vh;
     background-repeat: no-repeat;
     overflow: hidden;
+    user-select: none;
 }
 
 .chocoWins, .kittyWins, .tieGame, #game-area {
@@ -102,6 +103,7 @@ header::after {
     background-color: white;
     color: blue;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    outline: none;
 }
 
 .card {
@@ -139,6 +141,7 @@ header::after {
 .card.back {
     transform: rotateY(180deg);
 }
+
 .logo{
     background-image: url(assets/images/HK-head.png);
     height: 20vh;
@@ -244,6 +247,8 @@ header::after {
 .turn-indicator img{
     height: 50%;
     width: 50%;
+    -webkit-animation: anim 5s infinite linear;
+    animation: anim 5s infinite linear;
 }
 
 .choco-cat-score, .kitty-cat-score{
@@ -324,4 +329,17 @@ header::after {
     display: block;
     text-align: center;
     font-size: 6em;
+    margin: 2%;
+    height: 7vh;
+    width: 7vh;
+}
+
+@-webkit-keyframes anim {
+    from {-webkit-transform: rotateY(0deg);}
+    to {-webkit-transform: rotateY(360deg);}
+}
+
+@keyframes anim {
+    from {transform: rotateY(0deg);}
+    to {transform: rotateY(360deg);}
 }
