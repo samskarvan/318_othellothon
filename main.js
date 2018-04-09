@@ -29,6 +29,18 @@ gameThemeMusic.onpause = function() {
 
 $("html").append(coinFlipSound, gameThemeMusic);
 
+function instructionsModal() {
+    var instructionsModal = ($("<div>", {
+        class: "instructionsModal",
+        click: disappearModal
+    }));
+}
+
+function disappearModal() {
+
+}
+
+
 function createGameBoard(columnAmount, rowAmount) {
     var gameBoard = $("#game-area");
     var rowCountFirst = 0;
@@ -399,34 +411,50 @@ function newGame(){
 }
 
 function changeGameScore(){
+    var gameBoard = $("#game-area");
     var chocoCoinArray = $('.black').toArray();
     var kittyCoinArray = $('.white').toArray();
-    var kittyScore = kittyCoinArray.length;
-    var chocoScore = chocoCoinArray.length;
+    // var kittyScore = kittyCoinArray.length;
+    // var chocoScore = chocoCoinArray.length;
+    var kittyScore = 33;
+    var chocoScore = 31;
     $('.choco-cat-score').text(chocoScore);
     $('.kitty-cat-score').text(kittyScore);
-    winGame(chocoScore,kittyScore);
-}
-
-function winGame(chocoScore,kittyScore){
-    if(chocoScore+kittyScore==64){
-        //game over modal.show(); on click of the modal reset game button, call newGame function
-    }else{
-        return;
+    if(chocoScore + kittyScore === 64){
+        gameBoard.empty();
+        var winScreen;
+        if (chocoScore > kittyScore) {
+            console.log("chocowins!");
+            var chocoCoin = $("<img>").attr("src",'assets/images/choco-coin-cropped.png').addClass("chocoWins");
+            var winText = $("<span>").text("Wow, good job Choco! You Win!").addClass("chocoWins");
+            winScreen = $("<div>").append(chocoCoin, kittyCoin, winText);
+        } else if (chocoScore < kittyScore) {
+            console.log("kittywins!");
+            var kittyCoin =  $("<img>").attr("src", 'assets/images/kitty-coin-cropped.png').addClass("kittyWins");
+            var winText = $("<span>").text("Wow, good job Kitty! You Win!").addClass("kittyWins");
+            winScreen = $("<div>").append(chocoCoin, kittyCoin, winText);
+        } else {
+            console.log("tieGame");
+            var chocoCoin = $("<img>").attr("src",'assets/images/choco-coin-cropped.png').addClass("tieCoin");
+            var kittyCoin =  $("<img>").attr("src", 'assets/images/kitty-coin-cropped.png').addClass("tieCoin");
+            var winText = $("<span>").text("Bravo, it's a tie game!").addClass("tieSpan");
+            winScreen = $("<div>").append(chocoCoin, kittyCoin, winText);
+        }
+        gameBoard.append(winScreen)
     }
 }
 
 function muteMusic() {
-    var mute = "https://cdn0.iconfinder.com/data/icons/forgen-audio-video/48/mute-512.png";
-    var play = "https://cdn2.iconfinder.com/data/icons/social-productivity-line-art-2/128/volume-512.png";
+    var muteIcon = "https://cdn0.iconfinder.com/data/icons/forgen-audio-video/48/mute-512.png";
+    var playIcon = "https://cdn2.iconfinder.com/data/icons/social-productivity-line-art-2/128/volume-512.png";
     if (gameThemeMusic.muted === true) {
         gameThemeMusic.muted = false;
         coinFlipSound.muted = false;
-        $("button img")[0].src = play;
+        $("button img")[0].src = playIcon;
     } else {
         gameThemeMusic.muted = true;
         coinFlipSound.muted = true;
-        $("button img")[0].src = mute;
+        $("button img")[0].src = muteIcon;
     }
 }
 
