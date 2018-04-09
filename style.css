@@ -10,7 +10,7 @@ body{
     user-select: none;
 }
 
-#game-area {
+.chocoWins, .kittyWins, .tieGame, #game-area {
     display: inline-block;
     height: 65vh;
     width: 40vw;
@@ -88,7 +88,7 @@ header::after {
     padding: 1%;
 }
 
-button, .reset{
+.reset{
     height: 10vh;
     width: 10vw;
     background-color: #F697C3;
@@ -96,8 +96,16 @@ button, .reset{
     border-radius: 15px;
     /*margin: 15px;*/
     font-size: 1em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.reset:hover {
+    background-color: white;
+    color: blue;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     outline: none;
 }
+
 .card {
     transition: 0.4s;
     transform-style: preserve-3d;
@@ -259,18 +267,68 @@ button, .reset{
     background-color: #C1466F;
 }
 
-.mute img {
+.helloModal, .mute img {
     height: 80%;
     width: 80%;
 }
 
-.mute {
+.helloModal, .mute {
     border: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     position: relative;
     z-index: 1;
     background-color: rgba(0, 255, 0, 0.4);
     float: right;
+    margin: 1%;
+    height: 8vh;
+    width: 8vh;
+    border-radius: 100%;
+}
+
+.helloModal {
+    background-color: #FDF9CA;
+}
+
+.aboutModal {
+    background-color: lightseagreen;
+}
+
+.modal-title {
+    text-align: center;
+}
+
+.modal-body {
+    font-size: 2em;
+}
+
+.aggretsuko {
+    height: 50%;
+    width: 50%;
+}
+
+.chocoWins, .kittyWins {
+    height: 60%;
+    width: 60%;
+    transform: translate(0%, 1%);
+    display: block;
+    margin: auto;
+    font-size: 4em;
+    text-align: center;
+}
+
+/*.kittyWins {*/
+
+/*}*/
+
+.tieCoin {
+    height: 50%;
+    width: 50%;
+}
+
+.tieSpan {
+    display: block;
+    text-align: center;
+    font-size: 6em;
     margin: 2%;
     height: 7vh;
     width: 7vh;
