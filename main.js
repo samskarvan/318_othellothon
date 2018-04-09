@@ -8,6 +8,7 @@ middleSquares();
 gameThemeMusic.play();
 $(".reset").click(newGame);
 $(".mute").click(muteMusic);
+$("#rulesModalButton").click();
 }
 
 var playerWithCurrentTurn = "black";
