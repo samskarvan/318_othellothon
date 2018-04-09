@@ -5,14 +5,83 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
     <script src="main.js"></script>
     <title>Othello Kitty</title>
 </head>
+
+
 <body>
+<!-- About Button trigger bootstrap modal -->
+<button type="button" class="btn btn-primary helloModal aboutModal" data-toggle="modal" data-target="#aboutModal">
+    <span class="AboutSpan"><strong>About</strong></span>
+</button>
+
+<!-- About Modal -->
+<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="exampleModalLabel">About The Developers<br><img class="aggretsuko" src="assets/images/aggretsuko.jpg"><br><img src="assets/images/choco-coin-cropped.png"><img src="assets/images/kitty-coin-cropped.png"><br>Sam and the Double AA's</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <br><span>is our name, and OtHello Kitty is our game! We are a trio of loose cannon developers who don't play by the rules - unless those rules are
+            for Othello/Reversi! With our sweet skills in jQuery, javaScript, CSS, and HTML, we made some magic
+            happen by bringing some of the most beloved Sanrio characters to an old classic! Please enjoy this humble masterpiece.<br>
+
+            -S.AA's</span><br><br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary modalClose" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end of about modal-->
+
+
+<!-- Rules Button trigger bootstrap modal -->
+<button type="button" id="rulesModalButton" class="btn btn-primary helloModal" data-toggle="modal" data-target="#rulesModal">
+    <span class="howToPlaySpan"><strong>Rules</strong></span>
+</button>
+<!-- Rules Modal -->
+<div class="modal fade" id="rulesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="">OtHello Kitty Rules<br><img src="assets/images/choco-coin-cropped.png"><img src="assets/images/kitty-coin-cropped.png"></h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <span><a target="blank" href="https://en.wikipedia.org/wiki/Reversi">Othello, also known as Reversi</a> is an 8x8 strategy board game with two players.</span>
+                <br><span>Now, you can play with ChocoCat and Hello Kitty, too!</span><br><br>
+                <ul>
+                    <li>Choose which color you would like to be.</li>
+                    <li>Black goes first.</li>
+                    <li>Find a piece of your opponent's color on the board.</li>
+                    <li>Look at the row (horizontal, vertical, or diagonal) and make sure one of your pieces is also in that row.</li>
+                    <li>Place your piece. Your opponent's pieces will flip, and you gain points!</li>
+                    <li>The number of points you have are the number of coins you have on the board.</li>
+                    <li>The player with the most pieces on the board by the end of the game wins!</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary modalClose" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end of Rules modal-->
+
+
 <header>
     <div class="logo"></div>
     <div class="pageTitle"></div>
@@ -28,8 +97,8 @@
     </div>
     <div class="score">
         <div class="stat-label">Score</div>
-        <div class="choco-score"><img src="assets/images/chococat-head.gif"><div class="choco-cat-score">:SCORE</div></div>
-        <div class="kitty-score"><img src="assets/images/kitty-head-1.png"><div class="kitty-cat-score">:SCORE</div></div>
+        <div class="choco-score"><img src="assets/images/chococat-head.gif"><div class="choco-cat-score">0</div></div>
+        <div class="kitty-score"><img src="assets/images/kitty-head-1.png"><div class="kitty-cat-score">0</div></div>
 
     </div>
     <div class="games-played">
