@@ -410,10 +410,8 @@ function changeGameScore(){
     var gameBoard = $("#game-area");
     var chocoCoinArray = $('.black').toArray();
     var kittyCoinArray = $('.white').toArray();
-    // var kittyScore = kittyCoinArray.length;
-    // var chocoScore = chocoCoinArray.length;
-    var kittyScore = 33;
-    var chocoScore = 31;
+    var kittyScore = kittyCoinArray.length;
+    var chocoScore = chocoCoinArray.length;
     $('.choco-cat-score').text(chocoScore);
     $('.kitty-cat-score').text(kittyScore);
     if(chocoScore + kittyScore === 64){
@@ -422,12 +420,12 @@ function changeGameScore(){
         if (chocoScore > kittyScore) {
             console.log("chocowins!");
             var chocoCoin = $("<img>").attr("src",'assets/images/choco-coin-cropped.png').addClass("chocoWins");
-            var winText = $("<span>").text("Wow, good job Choco! You Win!").addClass("chocoWins");
+            var winText = $("<span>").text("Wow, good job Choco! You Win!").addClass("winSpan");
             winScreen = $("<div>").append(chocoCoin, kittyCoin, winText);
         } else if (chocoScore < kittyScore) {
             console.log("kittywins!");
             var kittyCoin =  $("<img>").attr("src", 'assets/images/kitty-coin-cropped.png').addClass("kittyWins");
-            var winText = $("<span>").text("Wow, good job Kitty! You Win!").addClass("kittyWins");
+            var winText = $("<span>").text("Wow, good job Kitty! You Win!").addClass("winSpan");
             winScreen = $("<div>").append(chocoCoin, kittyCoin, winText);
         } else {
             console.log("tieGame");
