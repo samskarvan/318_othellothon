@@ -2,13 +2,13 @@
 $(document).ready(initializeApp);
 
 function initializeApp(){
-console.log("Hello, Kitty!");
-createGameBoard(8,8);
-middleSquares();
-gameThemeMusic.play();
-$(".reset").click(newGame);
-$(".mute").click(muteMusic);
-$("#rulesModalButton").click();
+    console.log("Hello, Kitty!");
+    createGameBoard(8,8);
+    middleSquares();
+    gameThemeMusic.play();
+    $(".reset").click(newGame);
+    $(".mute").click(muteMusic);
+    $("#rulesModalButton").click();
 }
 
 var playerWithCurrentTurn = "black";
@@ -28,18 +28,6 @@ gameThemeMusic.onpause = function() {
 };
 
 $("html").append(coinFlipSound, gameThemeMusic);
-
-function instructionsModal() {
-    var instructionsModal = ($("<div>", {
-        class: "instructionsModal",
-        click: disappearModal
-    }));
-}
-
-function disappearModal() {
-
-}
-
 
 function createGameBoard(columnAmount, rowAmount) {
     var gameBoard = $("#game-area");
@@ -98,19 +86,43 @@ function flipCoins(array) {
             if (playerWithCurrentTurn === "black") {
                 playerWithCurrentTurn = "white";
                 $('.turn-indicator img').attr('src', 'assets/images/kitty-coin.gif');
+                checkForValidMoves();
             } else {
                 playerWithCurrentTurn = "black";
                 $('.turn-indicator img').attr('src', 'assets/images/choco-coin.gif');
+                checkForValidMoves();
             }
             changeGameScore();
             coinFlipSound.play();
         }
 }
 
+function checkForValidMoves() {
+    coinFlipArray = [];
+    var blankSquaresArray = $(".square.front:not(.white,.black)");
+    for (var squareIt = 0; squareIt < blankSquaresArray.length; squareIt++) {
+        var holdTheOb = blankSquaresArray[squareIt];
+        var row = parseInt($(blankSquaresArray[squareIt]).attr('row'));
+        var column = parseInt($(blankSquaresArray[squareIt]).attr('column'));
+        checkHorizontal(row, column, holdTheOb);
+        checkVertical(row, column, holdTheOb);
+        checkDiagonal(row, column, holdTheOb);
+        if(coinFlipArray.length > 0){
+            coinFlipArray = [];
+            return;
+        } else {
+            coinFlipArray = [];
+        }
+        if ((squareIt+1) === blankSquaresArray.length) {
+            console.log("No more possible moves");
+            winCondition();
+        }
+    }
+}
+
 function checkForValidHover(){
     var holdTheOb = this;
     if ($(this).attr('value') === "not-clicked") {
-        var valueClicked = $(this).attr('value');
         var rowClicked = parseInt($(this).attr('row'));
         var columnClicked = parseInt($(this).attr('column'));
         checkHorizontal(rowClicked, columnClicked, holdTheOb);
@@ -408,36 +420,55 @@ function newGame(){
     $('.kitty-cat-score').text(0);
 }
 
-function changeGameScore(){
-    var gameBoard = $("#game-area");
+function changeGameScore() {
     var chocoCoinArray = $('.black').toArray();
     var kittyCoinArray = $('.white').toArray();
     var kittyScore = kittyCoinArray.length;
     var chocoScore = chocoCoinArray.length;
     $('.choco-cat-score').text(chocoScore);
     $('.kitty-cat-score').text(kittyScore);
-    if(chocoScore + kittyScore === 64){
-        gameBoard.empty();
-        var winScreen;
-        if (chocoScore > kittyScore) {
-            console.log("chocowins!");
-            var chocoCoin = $("<img>").attr("src",'assets/images/choco-coin-cropped.png').addClass("chocoWins");
-            var winText = $("<span>").text("Wow, good job Choco! You Win!").addClass("winSpan");
-            winScreen = $("<div>").append(chocoCoin, kittyCoin, winText);
-        } else if (chocoScore < kittyScore) {
-            console.log("kittywins!");
-            var kittyCoin =  $("<img>").attr("src", 'assets/images/kitty-coin-cropped.png').addClass("kittyWins");
-            var winText = $("<span>").text("Wow, good job Kitty! You Win!").addClass("winSpan");
-            winScreen = $("<div>").append(chocoCoin, kittyCoin, winText);
-        } else {
-            console.log("tieGame");
-            var chocoCoin = $("<img>").attr("src",'assets/images/choco-coin-cropped.png').addClass("tieCoin");
-            var kittyCoin =  $("<img>").attr("src", 'assets/images/kitty-coin-cropped.png').addClass("tieCoin");
-            var winText = $("<span>").text("Bravo, it's a tie game!").addClass("tieSpan");
-            winScreen = $("<div>").append(chocoCoin, kittyCoin, winText);
-        }
-        gameBoard.append(winScreen)
+    if (chocoScore + kittyScore === 64) {
+        winCondition();
     }
+}
+
+function winCondition() {
+    var chocoCoinArray = $('.black').toArray();
+    var kittyCoinArray = $('.white').toArray();
+    var kittyScore = kittyCoinArray.length;
+    var chocoScore = chocoCoinArray.length;
+    var gameBoard = $("#game-area");
+    gameBoard.empty();
+    var winScreen;
+    var winText;
+    var chocoCoin;
+    var kittyCoin;
+    if (chocoScore > kittyScore) {
+        console.log("chocowins!");
+        chocoCoin = $("<img>").attr("src",'assets/images/choco-coin-cropped.png').addClass("chocoWins");
+        if (chocoScore + kittyScore === 64) {
+            winText = $("<span>").text("Wow, good job Choco! You Win!").addClass("winSpan");
+        } else {
+            winText = $("<span>").text("No more possible moves. Good job Choco! You Win!").addClass("winSpan");
+        }
+        winScreen = $("<div>").append(chocoCoin, kittyCoin, winText);
+    } else if (chocoScore < kittyScore) {
+        console.log("kittywins!");
+        kittyCoin =  $("<img>").attr("src", 'assets/images/kitty-coin-cropped.png').addClass("kittyWins");
+        if (chocoScore + kittyScore === 64) {
+            winText = $("<span>").text("Wow, good job Kitty! You Win!").addClass("winSpan");
+        } else {
+            winText = $("<span>").text("No more possible moves. God job Kitty! You Win!").addClass("winSpan");
+        }
+        winScreen = $("<div>").append(chocoCoin, kittyCoin, winText);
+    } else {
+        console.log("tieGame");
+        chocoCoin = $("<img>").attr("src",'assets/images/choco-coin-cropped.png').addClass("tieCoin");
+        kittyCoin =  $("<img>").attr("src", 'assets/images/kitty-coin-cropped.png').addClass("tieCoin");
+        winText = $("<span>").text("Bravo, it's a tie game!").addClass("tieSpan");
+        winScreen = $("<div>").append(chocoCoin, kittyCoin, winText);
+    }
+    gameBoard.append(winScreen)
 }
 
 function muteMusic() {
