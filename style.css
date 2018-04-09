@@ -2,6 +2,7 @@
     font-family: "arial", sans serif;
     color: #12295C;
 }
+
 body{
     background-image: url("assets/images/Hello-Kitty-4.jpg");
     background-size: 100vw 100vh;
@@ -30,13 +31,16 @@ body{
     font-weight: bold;
     font-size: 1.4rem;
     background-color: #F697C3;
+
 }
 .card.flip{
     transform: rotateY(-180deg) scaleX(-1);
 }
+
 .disabled {
     pointer-events: none;
 }
+
 .card, .card img {
     width: 125px;
     height: 150px;
@@ -53,10 +57,12 @@ header{
     /*border-radius: 15px;*/
     opacity: 0.9;
 }
+
 header div {
     display: inline-block;
     padding: 5pt;
 }
+
 header::after {
     position: absolute;
     left: 0;
@@ -68,6 +74,7 @@ header::after {
     top: 15%;
     background-repeat: repeat-x;
 }
+
 #stats {
     position: absolute;
     padding: 15px;
@@ -116,6 +123,7 @@ button, .reset{
     z-index: -2;
     transform: rotateY(0deg);
 }
+
 .white {
     background-image: url("assets/images/kitty-coin-cropped.png");
     background-position: center;
@@ -123,6 +131,7 @@ button, .reset{
     z-index: -1;
     transform: rotateY(180deg);
 }
+
 .black{
     background-image: url("assets/images/choco-coin-cropped.png");
     background-position: center;
@@ -130,6 +139,7 @@ button, .reset{
     z-index: 0;
     transform: rotateY(180deg);
 }
+
 .card.back {
     transform: rotateY(180deg);
 }
@@ -162,6 +172,7 @@ button, .reset{
     top: 30%;
     left: 20%;
 }
+
 #settings-nav{
     height: 100px;
     width: 200px;
@@ -169,6 +180,7 @@ button, .reset{
     top: 30%;
     left: 18%;
 }
+
 #game-title{
     height: 75px;
     width: 225px;
@@ -176,6 +188,7 @@ button, .reset{
     right: 3%;
     bottom: 8%;
 }
+
 #about-content, #win-window {
     position: fixed;
     display: none;
@@ -188,6 +201,7 @@ button, .reset{
     background-color: rgba(84,7,18,0.8);
     z-index: 2;
 }
+
 #about-content-text{
     position: absolute;
     top: 50%;
@@ -198,6 +212,7 @@ button, .reset{
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
 }
+
 #about-content img {
     position: relative;
     left: 40%;
@@ -219,6 +234,7 @@ button, .reset{
     left: 30%;
     top: 200px;
 }
+
 #win-window p {
     position: relative;
     text-align: center;
@@ -226,16 +242,17 @@ button, .reset{
     font-size: 30pt;
 }
 
-
 .stat-label{
     color: #12295C;
     font-size: 20pt;
 }
+
 .game-pieces{
     z-index: -2;
     transform: rotateY(0deg);
     background-image: url("assets/images/kitty-coin.gif");
 }
+
 .turn-indicator img{
     height: 50%;
     width: 50%;
